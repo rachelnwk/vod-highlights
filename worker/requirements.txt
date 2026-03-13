@@ -1,0 +1,7 @@
+boto3==1.35.52
+mysql-connector-python==9.1.0
+easyocr==1.7.2
+pillow==10.4.0
+opencv-python==4.10.0.84
+rapidfuzz==3.10.1
+numpy>=2.0.0
