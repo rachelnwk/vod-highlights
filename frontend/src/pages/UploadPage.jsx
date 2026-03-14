@@ -64,14 +64,17 @@ export default function UploadPage() {
     setUploadProgress(0);
 
     if (!file) {
-      setError('Please select an .mp4 or .mov file.');
+      setError('Please select an .mp4, .mov, or .mkv file.');
       return;
     }
 
     setLoading(true);
     try {
-      const fallbackType = file.name.toLowerCase().endsWith('.mp4')
+      const lowerName = file.name.toLowerCase();
+      const fallbackType = lowerName.endsWith('.mp4')
         ? 'video/mp4'
+        : lowerName.endsWith('.mkv')
+        ? 'video/x-matroska'
         : 'video/quicktime';
       const contentType = file.type || fallbackType;
       setStatusText('Requesting upload URL...');
@@ -97,7 +100,7 @@ export default function UploadPage() {
     <div>
       <h2>Start A Highlight Job</h2>
       <p className="section-lead">
-        Use a 1080p `.mov` for the best OCR results, then enter the player name to track.
+        Use a 1080p `.mov`, `.mp4`, or `.mkv` for the best OCR results, then enter the player name to track.
       </p>
       <UploadForm
         file={file}

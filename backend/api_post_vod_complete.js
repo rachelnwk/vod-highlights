@@ -7,6 +7,16 @@
 const { SendMessageCommand } = require('@aws-sdk/client-sqs');
 const { pool, sqsClient, env } = require('./config');
 
+const ALLOWED_EXTENSIONS = new Set(['.mp4', '.mov', '.mkv']);
+
+function getExtension(filename) {
+  const lastDot = filename.lastIndexOf('.');
+  if (lastDot < 0) {
+    return '';
+  }
+  return filename.slice(lastDot).toLowerCase();
+}
+
 /**
  * post_vod_complete:
  *
@@ -17,6 +27,11 @@ exports.post_vod_complete = async (request, response, next) => {
     console.log('**Call to post /vods/complete...');
 
     const { originalFilename, s3Key, playerName } = request.body;
+    const extension = getExtension(originalFilename || '');
+    if (!ALLOWED_EXTENSIONS.has(extension)) {
+      return response.status(400).json({ error: 'Only .mp4, .mov, and .mkv files are allowed.' });
+    }
+
     const connection = await pool.getConnection();
     let videoId;
     let jobId;

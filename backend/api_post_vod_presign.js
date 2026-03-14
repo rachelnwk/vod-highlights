@@ -9,6 +9,16 @@ const { PutObjectCommand } = require('@aws-sdk/client-s3');
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 const { s3Client, env } = require('./config');
 
+const ALLOWED_EXTENSIONS = new Set(['.mp4', '.mov', '.mkv']);
+
+function getExtension(filename) {
+  const lastDot = filename.lastIndexOf('.');
+  if (lastDot < 0) {
+    return '';
+  }
+  return filename.slice(lastDot).toLowerCase();
+}
+
 function buildUploadKey(filename) {
   const clean = filename.replace(/[^a-zA-Z0-9._-]/g, '_');
   return `uploads/${Date.now()}-${uuidv4()}-${clean}`;
@@ -24,6 +34,11 @@ exports.post_vod_presign = async (request, response, next) => {
     console.log('**Call to post /vods/presign...');
 
     const { filename, contentType } = request.body;
+    const extension = getExtension(filename || '');
+    if (!ALLOWED_EXTENSIONS.has(extension)) {
+      return response.status(400).json({ error: 'Only .mp4, .mov, and .mkv files are allowed.' });
+    }
+
     const s3Key = buildUploadKey(filename);
     const uploadUrl = await getSignedUrl(
       s3Client,

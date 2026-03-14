@@ -14,10 +14,10 @@ export default function UploadForm({
   return (
     <form onSubmit={onSubmit} className="upload-form">
       <label className="field-label">
-        Video (.mp4 or .mov)
+        Video (.mp4, .mov, or .mkv)
         <input
           type="file"
-          accept=".mp4,.mov,video/mp4,video/quicktime"
+          accept=".mp4,.mov,.mkv,video/mp4,video/quicktime,video/x-matroska"
           className="field-input"
           onChange={(e) => onFileChange(e.target.files?.[0] || null)}
           required

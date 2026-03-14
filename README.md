@@ -88,7 +88,7 @@ npm install
 npm run dev
 ```
 
-### 3) Worker
+### 3) Worker (for macOS)
 ```bash
 cd worker
 python3 -m venv .venv
