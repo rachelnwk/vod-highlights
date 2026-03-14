@@ -4,10 +4,12 @@
 // Saves video/job rows and enqueues processing work on SQS.
 //
 
+const { HeadObjectCommand } = require('@aws-sdk/client-s3');
 const { SendMessageCommand } = require('@aws-sdk/client-sqs');
-const { pool, sqsClient, env } = require('./config');
+const { pool, sqsClient, s3Client, env } = require('./config');
 
 const ALLOWED_EXTENSIONS = new Set(['.mp4', '.mov', '.mkv']);
+const MAX_UPLOAD_MB = Math.round(env.MAX_UPLOAD_BYTES / (1024 * 1024));
 
 function getExtension(filename) {
   const lastDot = filename.lastIndexOf('.');
@@ -30,6 +32,26 @@ exports.post_vod_complete = async (request, response, next) => {
     const extension = getExtension(originalFilename || '');
     if (!ALLOWED_EXTENSIONS.has(extension)) {
       return response.status(400).json({ error: 'Only .mp4, .mov, and .mkv files are allowed.' });
+    }
+
+    let uploadedObject;
+    try {
+      uploadedObject = await s3Client.send(
+        new HeadObjectCommand({
+          Bucket: env.AWS_S3_BUCKET,
+          Key: s3Key,
+        })
+      );
+    } catch {
+      return response.status(400).json({ error: 'Uploaded video not found in S3.' });
+    }
+
+    const uploadedSizeBytes = Number(uploadedObject?.ContentLength || 0);
+    if (!Number.isFinite(uploadedSizeBytes) || uploadedSizeBytes <= 0) {
+      return response.status(400).json({ error: 'Uploaded video is empty or unreadable.' });
+    }
+    if (uploadedSizeBytes > env.MAX_UPLOAD_BYTES) {
+      return response.status(400).json({ error: `Uploads must be ${MAX_UPLOAD_MB} MB or smaller.` });
     }
 
     const connection = await pool.getConnection();

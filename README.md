@@ -112,10 +112,10 @@ webservice=https://your-eb-env.us-east-2.elasticbeanstalk.com
 
 ## Elastic Beanstalk Deployment
 The provided `create.bash` and `update.bash` scripts now:
-- package only the backend app
-- include `backend/highlights-config.ini` in the deployment bundle
+- package the backend, worker, `Procfile`, and `.platform` hook files into one EB bundle
+- include `backend/highlights-config.ini` in the deployment bundle as the app's runtime config
 - exclude `.env` files
-- attach an EC2 instance profile so the backend can use IAM for S3/SQS
+- attach an EC2 instance profile so the backend and worker can use IAM for S3/SQS
 
 Before running either script:
 ```bash
@@ -161,5 +161,8 @@ Your EB instance profile should allow at least:
 ## Notes
 - `GET /health` is now a lightweight process check for EB and local smoke tests.
 - `GET /ping` is the deeper check that touches both S3 and MySQL.
+- Uploads are capped at `300 MB`. The frontend blocks larger files early, and the backend verifies the uploaded S3 object size before queueing work.
+- Elastic Beanstalk deployments now bundle the Node backend and the Python worker onto the same instance. The EB `Procfile` starts both processes, and a `.platform/hooks/predeploy` script installs the worker's Python dependencies.
+- The default EB instance type in `create.bash` and `create.ps1` is `t3.micro` to stay within Free Tier-eligible instance types.
 - This project is intentionally optimized for a class demo, not general-purpose production use.
 - OCR quality depends on feed readability and consistent capture settings.

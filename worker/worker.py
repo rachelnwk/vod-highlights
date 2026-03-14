@@ -188,7 +188,7 @@ def poll_forever():
                 QueueUrl=settings.AWS_SQS_QUEUE_URL,
                 MaxNumberOfMessages=1,
                 WaitTimeSeconds=20,
-                VisibilityTimeout=300,
+                VisibilityTimeout=settings.SQS_VISIBILITY_TIMEOUT_SECONDS,
             )
 
             messages = response.get("Messages", [])

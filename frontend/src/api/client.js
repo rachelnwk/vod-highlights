@@ -123,13 +123,13 @@ async function requestWithRetry(path, options = {}, operation = 'request') {
   throw new Error(`Request failed for ${operation}`);
 }
 
-export async function getPresignedUploadUrl(filename, contentType) {
+export async function getPresignedUploadUrl(filename, contentType, fileSizeBytes) {
   return requestWithRetry(
     '/vods/presign',
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ filename, contentType }),
+      body: JSON.stringify({ filename, contentType, fileSizeBytes }),
     },
     'getPresignedUploadUrl'
   );

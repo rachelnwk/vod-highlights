@@ -34,9 +34,10 @@ def _parse_ini(content: str) -> dict[str, str]:
 
 
 def _read_ini_values() -> dict[str, str]:
-    backend_dir = Path(__file__).resolve().parents[2] / "backend"
+    app_root = Path(__file__).resolve().parents[2]
     ini_paths = [
-        backend_dir / "highlights-config.ini",
+        app_root / "highlights-config.ini",
+        app_root / "backend" / "highlights-config.ini",
     ]
 
     extra_path = os.getenv("HIGHLIGHTS_CONFIG_PATH")
@@ -100,6 +101,9 @@ MERGE_WINDOW_SECONDS = float(_first("MERGE_WINDOW_SECONDS", default=str(constant
 CLIP_PRE_SECONDS = float(_first("CLIP_PRE_SECONDS", default=str(constants.CLIP_PRE_SECONDS)))
 CLIP_POST_SECONDS = float(_first("CLIP_POST_SECONDS", default=str(constants.CLIP_POST_SECONDS)))
 FUZZY_MATCH_THRESHOLD = int(_first("FUZZY_MATCH_THRESHOLD", default=str(constants.FUZZY_MATCH_THRESHOLD)))
+SQS_VISIBILITY_TIMEOUT_SECONDS = int(
+    _first("SQS_VISIBILITY_TIMEOUT_SECONDS", default=str(constants.SQS_VISIBILITY_TIMEOUT_SECONDS))
+)
 
 LOCAL_TEMP_DIR = _first("LOCAL_TEMP_DIR", default=constants.LOCAL_TEMP_DIR)
 LOG_LEVEL = _first("LOG_LEVEL", default=constants.LOG_LEVEL)

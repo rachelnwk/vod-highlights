@@ -8,6 +8,7 @@ $Platform = "Node.js"
 $Hardware = "t3.micro"
 $ZipFile = "backend.zip"
 $AppDir = "backend"
+$WorkerDir = "worker"
 $InstanceProfile = if ($env:EB_INSTANCE_PROFILE) { $env:EB_INSTANCE_PROFILE } else { "aws-elasticbeanstalk-ec2-role" }
 $ServiceRole = if ($env:EB_SERVICE_ROLE) { $env:EB_SERVICE_ROLE } else { "" }
 $VpcId = ""
@@ -20,19 +21,49 @@ function Test-IsExcluded {
 
     return (
         $normalized -like "node_modules/*" -or
+        $normalized -like "__pycache__/*" -or
+        $normalized -like ".venv/*" -or
+        $normalized -like "temp/*" -or
         $normalized -like "*.log" -or
         $normalized -like "npm-debug.log*" -or
         $normalized -eq ".DS_Store" -or
         $normalized -like ".git/*" -or
         $normalized -eq ".env" -or
-        $normalized -like ".env.*"
+        $normalized -like ".env.*" -or
+        $normalized -like "*.pyc" -or
+        $normalized -like "*.pyo"
     )
+}
+
+function Copy-IncludedFiles {
+    param(
+        [string]$SourceDir,
+        [string]$DestinationDir
+    )
+
+    Get-ChildItem -Path $SourceDir -Recurse -File -Force | ForEach-Object {
+        $relativePath = $_.FullName.Substring($SourceDir.Length).TrimStart('\', '/')
+        if (Test-IsExcluded $relativePath) {
+            return
+        }
+
+        $destinationPath = Join-Path $DestinationDir $relativePath
+        $destinationDir = Split-Path $destinationPath -Parent
+        if (-not (Test-Path $destinationDir)) {
+            New-Item -ItemType Directory -Path $destinationDir -Force | Out-Null
+        }
+
+        Copy-Item $_.FullName $destinationPath
+    }
 }
 
 function New-BackendArchive {
     param([string]$ArchivePath)
 
     $backendDir = Join-Path $PSScriptRoot $AppDir
+    $workerDir = Join-Path $PSScriptRoot $WorkerDir
+    $platformDir = Join-Path $PSScriptRoot ".platform"
+    $procfilePath = Join-Path $PSScriptRoot "Procfile"
     $stagingDir = Join-Path ([System.IO.Path]::GetTempPath()) ("vod-highlights-backend-" + [guid]::NewGuid().ToString())
 
     if (Test-Path $ArchivePath) {
@@ -42,22 +73,17 @@ function New-BackendArchive {
     New-Item -ItemType Directory -Path $stagingDir | Out-Null
 
     try {
-        Get-ChildItem -Path $backendDir -Recurse -File -Force | ForEach-Object {
-            $relativePath = $_.FullName.Substring($backendDir.Length).TrimStart('\', '/')
-            if (Test-IsExcluded $relativePath) {
-                return
-            }
+        Copy-IncludedFiles -SourceDir $backendDir -DestinationDir $stagingDir
+        Copy-IncludedFiles -SourceDir $workerDir -DestinationDir (Join-Path $stagingDir $WorkerDir)
 
-            $destinationPath = Join-Path $stagingDir $relativePath
-            $destinationDir = Split-Path $destinationPath -Parent
-            if (-not (Test-Path $destinationDir)) {
-                New-Item -ItemType Directory -Path $destinationDir -Force | Out-Null
-            }
-
-            Copy-Item $_.FullName $destinationPath
+        if (Test-Path $platformDir) {
+            Copy-IncludedFiles -SourceDir $platformDir -DestinationDir (Join-Path $stagingDir ".platform")
         }
 
-        Compress-Archive -Path (Join-Path $stagingDir "*") -DestinationPath $ArchivePath -Force
+        Copy-Item $procfilePath (Join-Path $stagingDir "Procfile")
+
+        $archiveEntries = Get-ChildItem -Path $stagingDir -Force | Select-Object -ExpandProperty FullName
+        Compress-Archive -Path $archiveEntries -DestinationPath $ArchivePath -Force
     }
     finally {
         if (Test-Path $stagingDir) {

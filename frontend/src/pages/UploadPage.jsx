@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import UploadForm from '../components/UploadForm';
 import { completeUpload, getPresignedUploadUrl } from '../api/client';
 
+const MAX_UPLOAD_BYTES = 300 * 1024 * 1024;
+const MAX_UPLOAD_MB = Math.round(MAX_UPLOAD_BYTES / (1024 * 1024));
+
 function uploadFileToS3(uploadUrl, file, contentType, onProgress) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -67,6 +70,10 @@ export default function UploadPage() {
       setError('Please select an .mp4, .mov, or .mkv file.');
       return;
     }
+    if (file.size > MAX_UPLOAD_BYTES) {
+      setError(`Please choose a video that is ${MAX_UPLOAD_MB} MB or smaller.`);
+      return;
+    }
 
     setLoading(true);
     try {
@@ -78,7 +85,7 @@ export default function UploadPage() {
         : 'video/quicktime';
       const contentType = file.type || fallbackType;
       setStatusText('Requesting upload URL...');
-      const presign = await getPresignedUploadUrl(file.name, contentType);
+      const presign = await getPresignedUploadUrl(file.name, contentType, file.size);
 
       setStatusText('Uploading video to S3...');
       await uploadFileToS3(presign.uploadUrl, file, contentType, setUploadProgress);

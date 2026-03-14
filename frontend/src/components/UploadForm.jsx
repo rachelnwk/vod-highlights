@@ -36,6 +36,7 @@ export default function UploadForm({
         />
       </label>
 
+      <p className="helper-text">Maximum upload size: 300 MB.</p>
       {file ? <p className="helper-text">Selected file: {file.name}</p> : null}
       {loading && statusText ? (
         <p className="helper-text">

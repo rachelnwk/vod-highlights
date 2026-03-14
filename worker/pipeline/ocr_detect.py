@@ -1,11 +1,22 @@
-from pathlib import Path
 import os
-import easyocr
+from pathlib import Path
+
 from utils.text_match import is_player_match
 from utils.time_utils import frame_filename_to_index, frame_index_to_seconds
 
-# easyocr is used for MVP because setup is simple and works well enough for a fixed crop region.
-reader = easyocr.Reader(["en"], gpu=False)
+_reader = None
+
+
+def _get_reader():
+    global _reader
+
+    if _reader is None:
+        import easyocr
+
+        # Lazy-load OCR so the worker can start without loading the model until a job actually needs it.
+        _reader = easyocr.Reader(["en"], gpu=False)
+
+    return _reader
 
 
 def detect_player_events(
@@ -16,6 +27,7 @@ def detect_player_events(
 ) -> list[dict]:
     detections: list[dict] = []
     threshold = fuzzy_match_threshold if fuzzy_match_threshold is not None else int(os.getenv("FUZZY_MATCH_THRESHOLD", "78"))
+    reader = _get_reader()
 
     for crop_path in sorted(crops_dir.glob("*.jpg")):
         ocr_results = reader.readtext(str(crop_path), detail=1, paragraph=False)
