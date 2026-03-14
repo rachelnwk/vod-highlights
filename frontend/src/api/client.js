@@ -33,17 +33,12 @@ function parseIni(content) {
 }
 
 const config = parseIni(clientIniText);
-const API_BASE =
-  config.VITE_API_BASE_URL ||
-  config.API_BASE_URL ||
+const LOCAL_HELPER_BASE =
+  config.VITE_LOCAL_HELPER_BASE_URL ||
+  config.LOCAL_HELPER_BASE_URL ||
+  config['client.local_helper'] ||
   config['client.webservice'] ||
-  'http://localhost:4000';
-const S3_BUCKET =
-  config.VITE_S3_BUCKET ||
-  config.AWS_S3_BUCKET ||
-  config.bucket_name ||
-  config['s3.bucket_name'] ||
-  '';
+  'http://localhost:4001';
 
 const RETRY_ATTEMPTS = 3;
 const RETRY_BASE_DELAY_MS = 500;
@@ -81,7 +76,7 @@ async function handleResponse(response) {
 
 async function requestWithRetry(path, options = {}, operation = 'request') {
   let lastError;
-  const url = `${API_BASE}${path}`;
+  const url = `${LOCAL_HELPER_BASE}${path}`;
 
   for (let attempt = 1; attempt <= RETRY_ATTEMPTS; attempt += 1) {
     const controller = new AbortController();
@@ -117,34 +112,57 @@ async function requestWithRetry(path, options = {}, operation = 'request') {
   }
 
   if (lastError) {
-    throw new Error(`Failed to reach API at ${API_BASE}: ${lastError.message}`);
+    throw new Error(`Failed to reach the local helper at ${LOCAL_HELPER_BASE}: ${lastError.message}`);
   }
 
   throw new Error(`Request failed for ${operation}`);
 }
 
-export async function getPresignedUploadUrl(filename, contentType, fileSizeBytes) {
-  return requestWithRetry(
-    '/vods/presign',
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ filename, contentType, fileSizeBytes }),
-    },
-    'getPresignedUploadUrl'
-  );
-}
+export function startLocalJob(file, playerName, onProgress) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', `${LOCAL_HELPER_BASE}/jobs`);
 
-export async function completeUpload(originalFilename, s3Key, playerName) {
-  return requestWithRetry(
-    '/vods/complete',
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ originalFilename, s3Key, playerName }),
-    },
-    'completeUpload'
-  );
+    xhr.upload.onprogress = (event) => {
+      if (!event.lengthComputable || !onProgress) {
+        return;
+      }
+      onProgress(Math.round((event.loaded / event.total) * 100));
+    };
+
+    xhr.onerror = () => {
+      reject(new Error(`Could not reach the local helper at ${LOCAL_HELPER_BASE}. Is it running?`));
+    };
+
+    xhr.onload = () => {
+      let payload = {};
+      try {
+        payload = JSON.parse(xhr.responseText || '{}');
+      } catch {
+        payload = {};
+      }
+
+      if (xhr.status >= 200 && xhr.status < 300) {
+        if (onProgress) {
+          onProgress(100);
+        }
+        resolve(payload);
+        return;
+      }
+
+      reject(
+        new Error(
+          payload.error ||
+            `Failed to start the local job (status ${xhr.status}).`
+        )
+      );
+    };
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('playerName', playerName);
+    xhr.send(formData);
+  });
 }
 
 export async function getJobStatus(jobId) {
@@ -155,6 +173,6 @@ export async function getClipsForVideo(videoId) {
   return requestWithRetry(`/videos/${videoId}/clips`, {}, 'getClipsForVideo');
 }
 
-export function getConfiguredBucket() {
-  return S3_BUCKET;
+export function getConfiguredLocalHelper() {
+  return LOCAL_HELPER_BASE;
 }

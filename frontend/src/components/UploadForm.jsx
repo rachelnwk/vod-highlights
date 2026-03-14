@@ -36,7 +36,7 @@ export default function UploadForm({
         />
       </label>
 
-      <p className="helper-text">Maximum upload size: 300 MB.</p>
+      <p className="helper-text">Maximum local video size: 300 MB.</p>
       {file ? <p className="helper-text">Selected file: {file.name}</p> : null}
       {loading && statusText ? (
         <p className="helper-text">
@@ -47,7 +47,7 @@ export default function UploadForm({
       {error ? <p className="error-text">{error}</p> : null}
 
       <button type="submit" className="primary-button" disabled={loading}>
-        {loading ? 'Uploading...' : 'Upload and Start Processing'}
+        {loading ? 'Starting...' : 'Start Local Processing'}
       </button>
     </form>
   );

@@ -1,13 +1,10 @@
 import React from 'react';
 
-export default function ClipCard({ clip, bucket }) {
-  const thumbnailUrl = `https://${bucket}.s3.amazonaws.com/${clip.thumbnailKey}`;
-  const clipUrl = `https://${bucket}.s3.amazonaws.com/${clip.clipKey}`;
-
+export default function ClipCard({ clip }) {
   return (
     <article className="clip-card">
       <img
-        src={thumbnailUrl}
+        src={clip.thumbnailUrl}
         alt={`Thumbnail for clip ${clip.clipId}`}
         className="clip-thumbnail"
       />
@@ -20,7 +17,7 @@ export default function ClipCard({ clip, bucket }) {
       <p className="clip-meta">
         <strong>Score:</strong> {clip.score}
       </p>
-      <a href={clipUrl} target="_blank" rel="noreferrer" className="secondary-button">
+      <a href={clip.clipUrl} target="_blank" rel="noreferrer" className="secondary-button">
         Open Clip
       </a>
     </article>

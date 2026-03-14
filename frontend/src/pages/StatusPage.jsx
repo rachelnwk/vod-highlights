@@ -51,7 +51,7 @@ export default function StatusPage() {
   return (
     <div>
       <h2>Job Status</h2>
-      <p className="section-lead">Polling every 3 seconds until processing is complete.</p>
+      <p className="section-lead">Polling the local helper every 3 seconds until the local clip build finishes.</p>
       <JobStatus job={job} />
       {error ? <p className="error-text">{error}</p> : null}
     </div>

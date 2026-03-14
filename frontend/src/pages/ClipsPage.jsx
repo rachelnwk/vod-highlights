@@ -2,9 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ClipCard from '../components/ClipCard';
-import { getClipsForVideo, getConfiguredBucket } from '../api/client';
-
-const bucket = import.meta.env.VITE_S3_BUCKET || getConfiguredBucket();
+import { getClipsForVideo } from '../api/client';
 
 export default function ClipsPage() {
   const { videoId } = useParams();
@@ -49,23 +47,14 @@ export default function ClipsPage() {
     return <p className="error-text">{error}</p>;
   }
 
-  if (!bucket) {
-    return (
-      <p className="error-text">
-        Missing S3 bucket configuration. Set `VITE_S3_BUCKET` or add the bucket to
-        `frontend/client-config.ini`.
-      </p>
-    );
-  }
-
   return (
     <div>
       <h2>Generated Clips for Video {videoId}</h2>
-      <p className="section-lead">Review and open each generated highlight clip.</p>
+      <p className="section-lead">Review the locally-cut highlight clips that were planned by AWS Lambda.</p>
       {clips.length === 0 ? <p className="helper-text">No clips found yet.</p> : null}
       <div className="clips-grid">
         {clips.map((clip) => (
-          <ClipCard key={clip.clipId} clip={clip} bucket={bucket} />
+          <ClipCard key={clip.clipId} clip={clip} />
         ))}
       </div>
     </div>

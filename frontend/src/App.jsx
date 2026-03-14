@@ -8,10 +8,10 @@ export default function App() {
   return (
     <div className="app-shell">
       <header className="app-header">
-        <p className="eyebrow">Cloud Video Pipeline</p>
+        <p className="eyebrow">Hybrid Local + AWS Pipeline</p>
         <h1>VOD Highlight Generator</h1>
         <p className="subtitle">
-          Upload a match clip, detect key moments, and review generated highlights.
+          Keep the source video on your machine, send OCR JSON to Lambda, and review the finished local clips.
         </p>
       </header>
 
