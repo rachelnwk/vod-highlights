@@ -7,6 +7,8 @@ export default function JobStatus({ job }) {
       : job.status === 'failed'
       ? 'bad'
       : 'warn';
+  const progress = Math.max(0, Math.min(job.progressPercent ?? 0, 100));
+  const clipCount = Array.isArray(job.clips) ? job.clips.length : job.summary?.clipCount;
 
   return (
     <div className="status-card">
@@ -20,6 +22,26 @@ export default function JobStatus({ job }) {
         <strong>Status:</strong>
         <span className={`status-pill ${tone}`}>{job.status}</span>
       </p>
+      {job.stage ? (
+        <p className="status-row">
+          <strong>Stage:</strong> {job.stage.replaceAll('_', ' ')}
+        </p>
+      ) : null}
+      {job.progressPercent !== undefined ? (
+        <>
+          <p className="status-row">
+            <strong>Progress:</strong> {job.progressPercent}%
+          </p>
+          <div className="progress-track" aria-hidden="true">
+            <div className={`progress-fill${progress >= 100 ? ' done' : ''}`} style={{ width: `${progress}%` }} />
+          </div>
+        </>
+      ) : null}
+      {clipCount !== undefined ? (
+        <p className="status-row">
+          <strong>Clips:</strong> {clipCount}
+        </p>
+      ) : null}
       {job.errorMessage ? (
         <p className="status-row error-text">
           <strong>Error:</strong> {job.errorMessage}

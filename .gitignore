@@ -5,8 +5,8 @@ Thumbs.db
 .idea/
 
 # Dependencies
-backend/node_modules/
 frontend/node_modules/
+frontend/dist/
 worker/.venv/
 
 # Python cache
@@ -18,18 +18,13 @@ frontend/dist/
 
 # Deployment artifacts
 *.zip
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
 
 # Local secrets
-backend/highlights-config.ini
-
-# Large local test asset
-sample.mp4
+worker/worker-config.ini
 
 # Worker temp output
 worker/temp/
+temp/
 
 # Logs
 *.log

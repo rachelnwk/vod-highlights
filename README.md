@@ -1,165 +1,114 @@
-# Cloud VOD Highlight Generator
+# VOD Highlight Generator
 
-Class-project MVP for generating FPS highlights from uploaded gameplay videos.
+This project has 3 parts:
 
-## Scope
-- One game profile
-- One fixed kill-feed crop window
-- One player name per upload
-- No authentication
+- `frontend/`: React UI
+- `worker/`: local Python service that processes videos
+- `lambda_console.py`: AWS Lambda highlight analysis code
 
-Fixed profile used for this project:
-- Input resolution: `1920x1080`
-- Kill-feed crop: top-right `450x225`
-- Crop coordinates: `x=1470`, `y=0`, `w=450`, `h=225`
+## Prerequisites
 
-## End-to-End Flow
-1. Frontend uploads a `.mov` to S3 (via presigned URL from backend).
-2. Backend creates `videos` and `jobs` rows and sends a job to SQS.
-3. Worker reads SQS message and runs OCR + clip pipeline.
-4. Worker uploads generated clips/thumbnails to S3 and saves metadata to MySQL.
-5. Frontend polls job status and displays final clips.
+- Python 3
+- Node.js + npm
+- FFmpeg
+- An S3 bucket
+- A MySQL database or RDS instance
+- An AWS Lambda + API Gateway endpoint for `lambda_console.py`
 
-## Tech Stack
-- Frontend: React + Vite
-- Backend: Node.js + Express
-- Worker: Python
-- Cloud: S3, SQS, RDS MySQL
+## Install
 
-## Non-trivial Operations
-1. OCR event detection from cropped kill-feed frames.
-2. Video cutting and thumbnail generation with `ffmpeg`.
-3. Merge logic for overlapping event windows before clip creation.
+1. Create the database schema.
 
-## API Endpoints
-- `GET /health`
-- `GET /ping`
-- `POST /vods/presign`
-- `POST /vods/complete`
-- `GET /jobs/:jobId`
-- `GET /videos/:videoId/clips`
+Use:
 
-## Local Setup
-### 1) Database
-Run `backend/schema.sql` against your MySQL instance.
-This single script now creates tables and one app database user.
-
-### Backend + Worker Configuration
-The backend and worker now use the normal AWS SDK credential chain:
-- Local dev: use `aws sso login`, `aws configure`, or exported AWS env vars.
-- Elastic Beanstalk: use the environment EC2 instance profile for IAM access to S3/SQS.
-
-App config lives in:
-- `backend/highlights-config.ini`
-- starter template: `backend/highlights-config.example.ini`
-
-Environment variables always win over `.ini` values.
-
-Important:
-- The app reads database and bucket/queue settings from the `.ini` file by default.
-- Do not store AWS access keys in the `.ini`; use IAM for AWS auth.
-- If you ever put this project in git, add the real `.ini` file to `.gitignore`.
-
-For a fresh machine:
-```bash
-cp backend/highlights-config.example.ini backend/highlights-config.ini
-```
-Then fill in your real RDS, S3, and SQS values locally.
-
-Example local setup:
-```bash
-export AWS_PROFILE=your-profile
+```sql
+worker/schema.sql
 ```
 
-Typical `.ini` values:
-- `rds.endpoint`
-- `rds.port_number`
-- `rds.user_name`
-- `rds.user_pwd`
-- `rds.db_name`
-- `s3.bucket_name`
-- `s3.region_name`
-- `sqs.queue_url`
+2. Configure the worker.
 
-### 2) Backend
-```bash
-cd backend
-npm install
-npm run dev
+Edit:
+
+```ini
+worker/worker-config.ini
 ```
 
-### 3) Worker (for macOS)
+Fill in:
+
+- `[analysis_api] base_url`
+- `[analysis_api] path`
+- `[s3] bucket_name`
+- `[s3] region_name`
+- `[rds] endpoint`
+- `[rds] user_name`
+- `[rds] user_pwd`
+- `[rds] db_name`
+
+3. Configure the frontend.
+
+Edit:
+
+```ini
+frontend/client-config.ini
+```
+
+Set `local_helper` to the worker URL, usually:
+
+```ini
+[client]
+local_helper=http://localhost:4001
+```
+
+4. Install and start the worker.
+
 ```bash
 cd worker
-python3 -m venv .venv
-source .venv/bin/activate
+python -m venv .venv
+.venv\Scripts\activate
 pip install -r requirements.txt
 python worker.py
 ```
 
-### 4) Frontend
+5. Install and start the frontend.
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-When testing the frontend against the deployed backend, set `frontend/client-config.ini`:
+## Lambda
+
+Deploy `lambda_console.py` to AWS Lambda and connect it to API Gateway.
+
+The route in API Gateway must match:
+
 ```ini
-[client]
-webservice=https://your-eb-env.us-east-2.elasticbeanstalk.com
+[analysis_api]
+path=...
 ```
 
-## Elastic Beanstalk Deployment
-The provided `create.bash` and `update.bash` scripts now:
-- package only the backend app
-- include `backend/highlights-config.ini` in the deployment bundle
-- exclude `.env` files
-- attach an EC2 instance profile so the backend can use IAM for S3/SQS
+## Tuning Parameters
 
-Before running either script:
-```bash
-export AWS_PROFILE=your-aws-profile
+Most processing settings live in:
+
+```ini
+worker/worker-config.ini
 ```
 
-Optional EB variables:
-```bash
-export EB_INSTANCE_PROFILE=aws-elasticbeanstalk-ec2-role
-export EB_SERVICE_ROLE=aws-elasticbeanstalk-service-role
-```
+Useful values to adjust:
 
-Create a new EB environment on macOS/Linux:
-```bash
-./create.bash
-```
+- `frame_sample_fps`: how often frames are sampled
+- `crop_x`, `crop_y`, `crop_w`, `crop_h`: kill-feed crop window
+- `clip_pre_seconds`, `clip_post_seconds`: how much video to save around each event
+- `dedupe_window_seconds`: how aggressively repeated OCR events are collapsed
+- `merge_window_seconds`: how close events must be to merge into one highlight
+- `fuzzy_match_threshold`: player-name match strictness
+- `max_concurrent_jobs`: how many videos can process at once
+- `temp_dir`: local working directory for worker artifacts
 
-Deploy an update on macOS/Linux:
-```bash
-./update.bash
-```
+## Files To Edit Most Often
 
-Create a new EB environment on Windows PowerShell:
-```powershell
-.\create.ps1
-```
-
-Deploy an update on Windows PowerShell:
-```powershell
-.\update.ps1
-```
-
-Delete the EB environment on Windows PowerShell:
-```powershell
-.\delete.ps1
-```
-
-Your EB instance profile should allow at least:
-- `s3:PutObject` on the uploads bucket
-- `s3:ListBucket` if you want `GET /ping` to count objects
-- `sqs:SendMessage` on the processing queue
-
-## Notes
-- `GET /health` is now a lightweight process check for EB and local smoke tests.
-- `GET /ping` is the deeper check that touches both S3 and MySQL.
-- This project is intentionally optimized for a class demo, not general-purpose production use.
-- OCR quality depends on feed readability and consistent capture settings.
+- `worker/worker-config.ini`
+- `frontend/client-config.ini`
+- `lambda_console.py`
