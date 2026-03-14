@@ -2,10 +2,16 @@ import React from 'react';
 import ClipCard from './ClipCard';
 import JobStatus from './JobStatus';
 
+// Purpose: Check whether a video record is still queued or processing.
+// Input: video (object) with the worker status fields.
+// Output: Boolean indicating whether the video is active.
 function isActive(video) {
   return video.status === 'queued' || video.status === 'processing';
 }
 
+// Purpose: Render one video card with its status and saved clip list.
+// Input: Props with the video record, selection state, and action callbacks.
+// Output: JSX for a single in-progress or saved video.
 export default function VideoJobCard({
   video,
   selectedClipIds,

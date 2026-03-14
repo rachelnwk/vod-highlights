@@ -1,6 +1,9 @@
 import React from 'react';
 import UploadPage from './UploadPage';
 
+// Purpose: Render the top-level frontend shell and mount the upload dashboard.
+// Input: No props.
+// Output: JSX for the application layout.
 export default function App() {
   return (
     <div className="app-shell">

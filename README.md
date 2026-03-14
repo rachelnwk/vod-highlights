@@ -4,7 +4,7 @@ This project has 3 parts:
 
 - `frontend/`: React UI
 - `worker/`: local Python service that processes videos
-- `lambda_console.py`: AWS Lambda highlight analysis code
+- `lambda/`: AWS Lambda highlight analysis code
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ This project has 3 parts:
 - FFmpeg
 - An S3 bucket
 - A MySQL database or RDS instance
-- An AWS Lambda + API Gateway endpoint for `lambda_console.py`
+- An AWS Lambda + API Gateway endpoint for `lambda/lambda_console.py`
 
 ## Install
 
@@ -79,7 +79,7 @@ npm run dev
 
 ## Lambda
 
-Deploy `lambda_console.py` to AWS Lambda and connect it to API Gateway.
+Deploy `lambda/lambda_console.py` to AWS Lambda and connect it to API Gateway.
 
 The route in API Gateway must match:
 
@@ -111,4 +111,4 @@ Useful values to adjust:
 
 - `worker/worker-config.ini`
 - `frontend/client-config.ini`
-- `lambda_console.py`
+- `lambda/lambda_console.py`

@@ -8,6 +8,9 @@ LOCAL_HELPER_PORT = CONFIG.getint("local_helper", "port")
 logger = get_logger("local-helper")
 
 
+# Purpose: Start the Flask worker API using the configured host and port.
+# Input: No function input; reads config values from module-level constants.
+# Output: None; starts the local web server when run as a script.
 if __name__ == "__main__":
     logger.info(
         "Starting local helper on http://%s:%s",

@@ -1,10 +1,5 @@
 # Highlight Analysis Lambda
 
-This folder contains the Python code intended for the AWS Lambda portion of the
-project.
-
-## What It Does
-
 The Lambda receives compact OCR JSON from the local helper, then performs the
 server-side highlight logic:
 
@@ -17,8 +12,8 @@ server-side highlight logic:
 
 ## Files
 
-- `lambda_console.py`: canonical single-file Lambda implementation
-- `README.md`: notes for the inline Lambda setup
+- `lambda/lambda_console.py`: canonical single-file Lambda implementation
+- `lambda/LAMBDA_README.md`: notes for the inline Lambda setup
 
 ## Expected Request Shape
 

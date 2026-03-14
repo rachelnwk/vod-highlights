@@ -7,6 +7,9 @@ AWS_S3_PREFIX = optional_value("s3", "prefix", "")
 AWS_S3_BUCKET = require_value("s3", "bucket_name")
 
 
+# Purpose: Build the S3 prefix used for all artifacts belonging to one video/job.
+# Input: video_id (str) identifying the processed video.
+# Output: String S3 prefix for that video's artifacts.
 def _video_prefix(video_id: str) -> str:
     prefix = AWS_S3_PREFIX.strip("/")
     if prefix:
@@ -14,6 +17,9 @@ def _video_prefix(video_id: str) -> str:
     return f"videos/{video_id}"
 
 
+# Purpose: Upload finalized clips and thumbnails to S3 and return their stored metadata.
+# Input: video_id (str) and clips (list[dict]) with local clip and thumbnail paths.
+# Output: List of uploaded clip metadata dicts ready to persist in the database.
 def upload_clips_and_thumbnails(video_id: str, clips: list[dict]) -> list[dict]:
     uploaded = []
     prefix = _video_prefix(video_id)

@@ -2,10 +2,16 @@ import json
 from difflib import SequenceMatcher
 
 
+# Purpose: Normalize OCR text for matching by lowercasing and stripping non-alphanumerics.
+# Input: value (str) containing raw OCR text.
+# Output: Normalized string suitable for fuzzy comparison.
 def normalize_text(value: str) -> str:
     return "".join(ch for ch in value.lower().strip() if ch.isalnum())
 
 
+# Purpose: Compute a lightweight partial-ratio score between two strings.
+# Input: a (str) and b (str) to compare.
+# Output: Float percentage score from 0.0 to 100.0.
 def _partial_ratio(a: str, b: str) -> float:
     if not a or not b:
         return 0.0
@@ -26,6 +32,9 @@ def _partial_ratio(a: str, b: str) -> float:
     return best
 
 
+# Purpose: Check whether OCR text matches the target player name using substring and fuzzy logic.
+# Input: ocr_text (str), player_name (str), and threshold (int) match cutoff.
+# Output: Tuple of (is_match, confidence) where confidence is normalized 0.0-1.0.
 def is_player_match(ocr_text: str, player_name: str, threshold: int) -> tuple[bool, float]:
     norm_text = normalize_text(ocr_text)
     norm_player = normalize_text(player_name)
@@ -40,16 +49,25 @@ def is_player_match(ocr_text: str, player_name: str, threshold: int) -> tuple[bo
     return score >= threshold, round(float(score) / 100.0, 4)
 
 
+# Purpose: Normalize a possibly empty value into a stripped string.
+# Input: value of any type, usually raw OCR text fields.
+# Output: Cleaned string with surrounding whitespace removed.
 def _clean_text(value) -> str:
     return str(value or "").strip()
 
 
+# Purpose: Blend match confidence with OCR confidence into one display score.
+# Input: match_confidence (float) and ocr_confidence (float).
+# Output: Combined confidence float rounded to 4 decimals.
 def _combine_confidence(match_confidence: float, ocr_confidence: float) -> float:
     if ocr_confidence > 0:
         return round((match_confidence + ocr_confidence) / 2, 4)
     return round(match_confidence, 4)
 
 
+# Purpose: Classify one OCR observation as a player kill, death, ambiguous event, or unclassified match.
+# Input: observation (dict), player_name (str), and threshold (int) for matching.
+# Output: Event dict or None if the observation does not match the player.
 def classify_player_event(observation: dict, player_name: str, threshold: int) -> dict | None:
     raw_text = _clean_text(observation.get("raw_text"))
     left_text = _clean_text(observation.get("left_text"))
@@ -117,6 +135,9 @@ def classify_player_event(observation: dict, player_name: str, threshold: int) -
     }
 
 
+# Purpose: Run player-event classification across all OCR observations.
+# Input: observations (list[dict]), player_name (str), and threshold (int).
+# Output: List of matched event dicts.
 def select_matching_events(observations: list[dict], player_name: str, threshold: int) -> list[dict]:
     matched_events: list[dict] = []
 
@@ -128,6 +149,9 @@ def select_matching_events(observations: list[dict], player_name: str, threshold
     return matched_events
 
 
+# Purpose: Collapse nearby repeated detections into one best-confidence event.
+# Input: raw_events (list[dict]) and dedupe_window_seconds (float).
+# Output: List of deduped event dicts.
 def dedupe_nearby_events(raw_events: list[dict], dedupe_window_seconds: float) -> list[dict]:
     if not raw_events:
         return []
@@ -148,6 +172,9 @@ def dedupe_nearby_events(raw_events: list[dict], dedupe_window_seconds: float) -
     return deduped
 
 
+# Purpose: Merge nearby events into highlight groups that should become clips.
+# Input: events (list[dict]) and merge_window_seconds (float).
+# Output: List of highlight-group dicts.
 def merge_events_into_highlights(events: list[dict], merge_window_seconds: float) -> list[dict]:
     if not events:
         return []
@@ -181,6 +208,9 @@ def merge_events_into_highlights(events: list[dict], merge_window_seconds: float
     return highlights
 
 
+# Purpose: Convert highlight groups into final clip windows and merge overlapping windows.
+# Input: highlights (list[dict]), clip_pre_seconds (float), and clip_post_seconds (float).
+# Output: List of clip-window dicts.
 def build_clip_windows(highlights: list[dict], clip_pre_seconds: float, clip_post_seconds: float) -> list[dict]:
     if not highlights:
         return []
@@ -212,6 +242,9 @@ def build_clip_windows(highlights: list[dict], clip_pre_seconds: float, clip_pos
     return merged
 
 
+# Purpose: Run the full highlight-analysis pipeline on one request payload.
+# Input: payload (dict) containing playerName, observations, and settings.
+# Output: Dict with matched events, highlight groups, clip windows, and summary counts.
 def analyze_highlight_request(payload: dict) -> dict:
     if not isinstance(payload, dict):
         raise ValueError("Request body must be a JSON object.")
@@ -268,6 +301,9 @@ def analyze_highlight_request(payload: dict) -> dict:
     }
 
 
+# Purpose: Format a Lambda/API Gateway HTTP response.
+# Input: status_code (int) and body (dict) response payload.
+# Output: Dict shaped like an API Gateway proxy response.
 def _response(status_code: int, body: dict) -> dict:
     return {
         "statusCode": status_code,
@@ -281,6 +317,9 @@ def _response(status_code: int, body: dict) -> dict:
     }
 
 
+# Purpose: Handle Lambda invocations, parse the incoming request, and return analysis results.
+# Input: event from Lambda/API Gateway and context from Lambda runtime.
+# Output: API Gateway proxy response dict with success or error payload.
 def lambda_handler(event, context):
     try:
         print("**Call to highlight analysis")

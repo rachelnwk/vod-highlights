@@ -1,5 +1,8 @@
 import React from 'react';
 
+// Purpose: Render one clip preview card with selection, preview, download, and discard actions.
+// Input: Props with the clip record, current selection state, and action callbacks.
+// Output: JSX for a single saved clip.
 export default function ClipCard({
   clip,
   selected,

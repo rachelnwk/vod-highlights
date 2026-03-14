@@ -4,10 +4,16 @@ import subprocess
 from imageio_ffmpeg import get_ffmpeg_exe
 
 
+# Purpose: Resolve the FFmpeg executable path from PATH or the bundled imageio copy.
+# Input: No arguments.
+# Output: String path to a runnable FFmpeg binary.
 def get_ffmpeg_binary() -> str:
     return shutil.which("ffmpeg") or get_ffmpeg_exe()
 
 
+# Purpose: Run an FFmpeg command and raise a readable error if it fails.
+# Input: command (list[str]) representing the FFmpeg command arguments.
+# Output: None; raises RuntimeError on failure.
 def run_ffmpeg(command: list[str]) -> None:
     """Runs an ffmpeg command and raises a clear error if the command fails."""
     resolved_command = command.copy()

@@ -68,9 +68,16 @@ _STAGE_PROGRESS = {
 }
 
 
+# Purpose: Build the local working-directory path for one job.
+# Input: job_id (str) identifying the worker job.
+# Output: Path to that job's root directory under temp_dir.
 def _job_root(job_id: str) -> Path:
     return Path(LOCAL_TEMP_DIR) / f"job-{job_id}"
 
+
+# Purpose: Convert one stored clip record into the frontend API response shape.
+# Input: clip (dict) containing persisted clip metadata.
+# Output: Dict with URLs and display-ready clip fields.
 def _serialize_clip(clip: dict) -> dict:
     clip_filename = Path(clip["clipS3Key"]).name
     return {
@@ -88,12 +95,19 @@ def _serialize_clip(clip: dict) -> dict:
     }
 
 
+# Purpose: Convert one stored video/job record into the frontend API response shape.
+# Input: video (dict) containing job metadata and nested clip records.
+# Output: Dict with serialized clip entries for the frontend.
 def _serialize_video(video: dict) -> dict:
     return {
         **video,
         "clips": [_serialize_clip(clip) for clip in video.get("clips", [])],
     }
 
+
+# Purpose: Update one in-memory job, persist it to MySQL, and return a snapshot.
+# Input: job_id (str) and keyword updates for the job state.
+# Output: Dict snapshot of the updated job.
 def _set_job_state(job_id: str, **updates) -> dict:
     with _lock:
         job = _jobs[job_id]
@@ -106,34 +120,52 @@ def _set_job_state(job_id: str, **updates) -> dict:
     return snapshot
 
 
+# Purpose: Read one in-memory job snapshot if it still exists.
+# Input: job_id (str) for the job to retrieve.
+# Output: Job dict copy or None if the job is no longer in memory.
 def _get_job(job_id: str) -> dict | None:
     with _lock:
         job = _jobs.get(job_id)
         return job.copy() if job else None
 
 
+# Purpose: Remove a completed or failed job from the in-memory active job map.
+# Input: job_id (str) identifying the job to forget.
+# Output: None.
 def _remove_job(job_id: str) -> None:
     with _lock:
         _jobs.pop(job_id, None)
 
 
+# Purpose: Count how many in-memory jobs are currently queued or processing.
+# Input: No arguments.
+# Output: Integer active job count.
 def _active_job_count() -> int:
     with _lock:
         return sum(1 for job in _jobs.values() if job["status"] in {"queued", "processing"})
 
 
+# Purpose: Delete intermediate frame and crop directories for one job.
+# Input: job_id (str) identifying the temp job directory to clean.
+# Output: None.
 def _cleanup_intermediate_dirs(job_id: str) -> None:
     job_dir = _job_root(job_id)
     for dirname in ("frames", "crops"):
         shutil.rmtree(job_dir / dirname, ignore_errors=True)
 
 
+# Purpose: Save a JSON artifact for debugging the analysis request/response.
+# Input: job_id (str), filename (str), and payload (dict) to write.
+# Output: None; writes a JSON file under the job directory.
 def _write_json(job_id: str, filename: str, payload: dict) -> None:
     output_path = _job_root(job_id) / "analysis" / filename
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
 
+# Purpose: Run the full local processing pipeline for one uploaded video job.
+# Input: job_id (str) identifying the in-memory job to process.
+# Output: None; updates job state, DB rows, S3 uploads, and local artifacts.
 def _process_job(job_id: str) -> None:
     job = _get_job(job_id)
     if job is None:
@@ -238,6 +270,9 @@ def _process_job(job_id: str) -> None:
         _remove_job(job_id)
 
 
+# Purpose: Add permissive CORS headers to every worker API response.
+# Input: response (Flask Response) from the current request.
+# Output: The same Response with CORS headers attached.
 @app.after_request
 def _add_cors_headers(response):
     response.headers["Access-Control-Allow-Origin"] = CORS_ALLOWED_ORIGIN
@@ -246,6 +281,9 @@ def _add_cors_headers(response):
     return response
 
 
+# Purpose: Report worker health, config readiness, and active job count.
+# Input: Current Flask request; supports GET and OPTIONS.
+# Output: JSON health response or empty OPTIONS response.
 @app.route("/health", methods=["GET", "OPTIONS"])
 def health():
     if request.method == "OPTIONS":
@@ -262,6 +300,9 @@ def health():
     )
 
 
+# Purpose: Accept a file upload, create a queued job, and start background processing.
+# Input: Multipart form request with file upload and playerName field.
+# Output: JSON containing the created jobId, videoId, and queued status.
 @app.route("/jobs", methods=["POST", "OPTIONS"])
 def create_job():
     if request.method == "OPTIONS":
@@ -321,6 +362,9 @@ def create_job():
     )
 
 
+# Purpose: List saved videos or delete all saved videos and clips.
+# Input: Current Flask request; supports GET, DELETE, and OPTIONS.
+# Output: JSON library payload for GET or delete summary for DELETE.
 @app.route("/videos", methods=["GET", "DELETE", "OPTIONS"])
 def get_videos():
     if request.method == "OPTIONS":
@@ -341,6 +385,9 @@ def get_videos():
     return jsonify({"videos": videos})
 
 
+# Purpose: Delete one saved clip from S3 and the database.
+# Input: video_id (str) and clip_id (str) from the route path.
+# Output: JSON delete confirmation or not-found error.
 @app.route("/videos/<video_id>/clips/<clip_id>", methods=["DELETE", "OPTIONS"])
 def delete_video_clip(video_id: str, clip_id: str):
     if request.method == "OPTIONS":
@@ -358,6 +405,9 @@ def delete_video_clip(video_id: str, clip_id: str):
     return jsonify({"deleted": True, "clipId": clip_id})
 
 
+# Purpose: Download selected clips from S3, merge them locally, and send one output file.
+# Input: JSON request body containing clipIds plus the current Flask request context.
+# Output: Flask file response for the merged video or a JSON validation error.
 @app.route("/clips/merge", methods=["POST", "OPTIONS"])
 def merge_library_clips():
     if request.method == "OPTIONS":
@@ -387,6 +437,9 @@ def merge_library_clips():
         else:
             merge_local_clips(local_paths, output_path)
 
+        # Purpose: Delete the temporary merge directory after the response is sent.
+        # Input: response (Flask Response) from send_file.
+        # Output: The same Response after cleanup is scheduled.
         @after_this_request
         def _cleanup_temp(response):
             shutil.rmtree(merge_dir, ignore_errors=True)
