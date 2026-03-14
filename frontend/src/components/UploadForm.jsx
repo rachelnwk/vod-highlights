@@ -7,47 +7,75 @@ export default function UploadForm({
   onPlayerNameChange,
   onSubmit,
   loading,
+  submitDisabled,
+  submitDisabledMessage,
   error,
   statusText,
   uploadProgress,
+  resetToken,
 }) {
+  const uploadInputId = `vod-file-${resetToken}`;
+
   return (
     <form onSubmit={onSubmit} className="upload-form">
-      <label className="field-label">
-        Video (.mp4, .mov, or .mkv)
+      <div className="field-label">
+        Video File
         <input
+          id={uploadInputId}
+          key={resetToken}
           type="file"
           accept=".mp4,.mov,.mkv,video/mp4,video/quicktime,video/x-matroska"
-          className="field-input"
+          className="upload-input"
           onChange={(e) => onFileChange(e.target.files?.[0] || null)}
           required
         />
-      </label>
+        <label htmlFor={uploadInputId} className={`upload-dropzone${file ? ' has-file' : ''}`}>
+          <span className="upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path
+                d="M12 16V6m0 0-4 4m4-4 4 4M5 18h14"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+          <span className="upload-title">{file ? file.name : 'Choose a VOD file'}</span>
+          <span className="upload-subtitle">
+            {file ? 'Click here to replace the current file.' : 'Click here to upload a .mov, .mp4, or .mkv file.'}
+          </span>
+        </label>
+      </div>
 
       <label className="field-label">
-        Player Name
+        Username
         <input
           type="text"
           value={playerName}
           onChange={(e) => onPlayerNameChange(e.target.value)}
-          placeholder="RachelLi"
           className="field-input"
           required
         />
       </label>
 
-      <p className="helper-text">Maximum local video size: 300 MB.</p>
-      {file ? <p className="helper-text">Selected file: {file.name}</p> : null}
       {loading && statusText ? (
-        <p className="helper-text">
-          {statusText}
-          {uploadProgress > 0 ? ` (${uploadProgress}%)` : ''}
-        </p>
+        <>
+          <p className="helper-text">
+            {statusText}
+            {uploadProgress > 0 ? ` (${uploadProgress}%)` : ''}
+          </p>
+          <div className="progress-track upload-track" aria-hidden="true">
+            <div className={`progress-fill${uploadProgress >= 100 ? ' done' : ''}`} style={{ width: `${uploadProgress}%` }} />
+          </div>
+        </>
       ) : null}
+      {!loading && submitDisabledMessage ? <p className="helper-text">{submitDisabledMessage}</p> : null}
       {error ? <p className="error-text">{error}</p> : null}
 
-      <button type="submit" className="primary-button" disabled={loading}>
-        {loading ? 'Starting...' : 'Start Local Processing'}
+      <button type="submit" className="primary-button upload-submit" disabled={loading || submitDisabled}>
+        {loading ? 'Starting...' : 'Begin Processing'}
       </button>
     </form>
   );

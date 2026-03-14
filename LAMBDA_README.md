@@ -8,6 +8,7 @@ project.
 The Lambda receives compact OCR JSON from the local helper, then performs the
 server-side highlight logic:
 
+- classify each kill-feed row as player kill vs player death when possible
 - normalize OCR text
 - fuzzy-match OCR text against the chosen player name
 - dedupe repeated nearby detections
@@ -16,9 +17,8 @@ server-side highlight logic:
 
 ## Files
 
-- `analysis.py`: pure analysis logic
-- `handler.py`: Lambda entry point for API Gateway
-- `requirements.txt`: lightweight Lambda dependencies
+- `lambda_console.py`: canonical single-file Lambda implementation
+- `README.md`: notes for the inline Lambda setup
 
 ## Expected Request Shape
 
@@ -29,7 +29,10 @@ server-side highlight logic:
     {
       "timestamp_seconds": 12.5,
       "frame": "frame_000025.jpg",
+      "row_index": 1,
       "raw_text": "RachelLi eliminated Opponent",
+      "left_text": "RachelLi",
+      "right_text": "Opponent",
       "ocr_confidence": 0.92
     }
   ],
@@ -37,7 +40,7 @@ server-side highlight logic:
     "fuzzyMatchThreshold": 78,
     "dedupeWindowSeconds": 2.0,
     "mergeWindowSeconds": 8.0,
-    "clipPreSeconds": 15.0,
+    "clipPreSeconds": 10.0,
     "clipPostSeconds": 0.0
   }
 }
@@ -45,6 +48,6 @@ server-side highlight logic:
 
 ## Local Smoke Test
 
-If `analysis_api.base_url` is left blank in the helper config, the local helper
-imports this same analysis package directly. That makes it easy to test the new
-pipeline locally before wiring the folder into AWS Lambda and API Gateway.
+The worker now expects `analysis_api.base_url` to point at your deployed API
+Gateway endpoint. This file is the Lambda implementation that API Gateway
+invokes.

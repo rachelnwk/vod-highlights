@@ -7,6 +7,8 @@ export default function JobStatus({ job }) {
       : job.status === 'failed'
       ? 'bad'
       : 'warn';
+  const progress = Math.max(0, Math.min(job.progressPercent ?? 0, 100));
+  const clipCount = Array.isArray(job.clips) ? job.clips.length : job.summary?.clipCount;
 
   return (
     <div className="status-card">
@@ -26,18 +28,18 @@ export default function JobStatus({ job }) {
         </p>
       ) : null}
       {job.progressPercent !== undefined ? (
-        <p className="status-row">
-          <strong>Progress:</strong> {job.progressPercent}%
-        </p>
+        <>
+          <p className="status-row">
+            <strong>Progress:</strong> {job.progressPercent}%
+          </p>
+          <div className="progress-track" aria-hidden="true">
+            <div className={`progress-fill${progress >= 100 ? ' done' : ''}`} style={{ width: `${progress}%` }} />
+          </div>
+        </>
       ) : null}
-      {job.summary?.matchedCount !== undefined ? (
+      {clipCount !== undefined ? (
         <p className="status-row">
-          <strong>Matched Events:</strong> {job.summary.matchedCount}
-        </p>
-      ) : null}
-      {job.summary?.clipCount !== undefined ? (
-        <p className="status-row">
-          <strong>Clips:</strong> {job.summary.clipCount}
+          <strong>Clips:</strong> {clipCount}
         </p>
       ) : null}
       {job.errorMessage ? (

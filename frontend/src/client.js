@@ -1,4 +1,4 @@
-import clientIniText from '../../client-config.ini?raw';
+import clientIniText from '../client-config.ini?raw';
 
 function parseIni(content) {
   const values = {};
@@ -43,6 +43,7 @@ const LOCAL_HELPER_BASE =
 const RETRY_ATTEMPTS = 3;
 const RETRY_BASE_DELAY_MS = 500;
 const REQUEST_TIMEOUT_MS = 10000;
+const MERGE_REQUEST_TIMEOUT_MS = 120000;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -165,12 +166,69 @@ export function startLocalJob(file, playerName, onProgress) {
   });
 }
 
-export async function getJobStatus(jobId) {
-  return requestWithRetry(`/jobs/${jobId}`, {}, 'getJobStatus');
+export async function listVideos() {
+  return requestWithRetry('/videos', {}, 'listVideos');
 }
 
-export async function getClipsForVideo(videoId) {
-  return requestWithRetry(`/videos/${videoId}/clips`, {}, 'getClipsForVideo');
+export async function discardClip(videoId, clipId) {
+  return requestWithRetry(
+    `/videos/${videoId}/clips/${clipId}`,
+    { method: 'DELETE' },
+    'discardClip'
+  );
+}
+
+export async function deleteAllVideos() {
+  return requestWithRetry(
+    '/videos',
+    { method: 'DELETE' },
+    'deleteAllVideos'
+  );
+}
+
+export async function downloadMergedClips(clipIds) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), MERGE_REQUEST_TIMEOUT_MS);
+
+  try {
+    const response = await fetch(`${LOCAL_HELPER_BASE}/clips/merge`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ clipIds }),
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      let message = 'Failed to merge selected clips.';
+      try {
+        const payload = await response.json();
+        message = payload.error || message;
+      } catch {
+        // Ignore parse errors and fall back to the generic error.
+      }
+      throw new Error(message);
+    }
+
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const disposition = response.headers.get('Content-Disposition') || '';
+    const match = disposition.match(/filename=\"?([^"]+)\"?/i);
+    const filename = match?.[1] || 'merged-library.mp4';
+
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = filename;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    throw new Error(`Failed to merge selected clips: ${error.message}`);
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 export function getConfiguredLocalHelper() {

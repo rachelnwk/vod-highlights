@@ -1,5 +1,7 @@
 import logging
-from config import settings
+from config.reader import require_value
+
+LOG_LEVEL = require_value("logging", "level")
 
 
 def get_logger(name: str = "worker") -> logging.Logger:
@@ -7,7 +9,7 @@ def get_logger(name: str = "worker") -> logging.Logger:
     if logger.handlers:
         return logger
 
-    logger.setLevel(getattr(logging, settings.LOG_LEVEL.upper(), logging.INFO))
+    logger.setLevel(getattr(logging, LOG_LEVEL.upper(), logging.INFO))
     handler = logging.StreamHandler()
     formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(name)s: %(message)s")
     handler.setFormatter(formatter)

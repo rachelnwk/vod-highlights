@@ -1,104 +1,75 @@
 # VOD Highlight Generator
 
-Class-project MVP for generating gameplay highlights with a hybrid local + AWS
-pipeline.
+This project has 3 parts:
 
-## Current Architecture
+- `frontend/`: React UI
+- `worker/`: local Python service that processes videos
+- `lambda_console.py`: AWS Lambda highlight analysis code
 
-The project now uses:
+## Prerequisites
 
-- `frontend/`: React + Vite demo UI
-- `worker/`: local helper that runs on the same machine as the source video
-- `lambda_functions/highlight_analysis/`: Python code intended for AWS Lambda
+- Python 3
+- Node.js + npm
+- FFmpeg
+- An S3 bucket
+- A MySQL database or RDS instance
+- An AWS Lambda + API Gateway endpoint for `lambda_console.py`
 
-The source video stays local. Only compact OCR/event JSON is sent to AWS.
+## Install
 
-## End-to-End Flow
+1. Create the database schema.
 
-1. The frontend uploads one local video to the local helper on `localhost`.
-2. The local helper extracts sampled frames and crops the fixed kill-feed region.
-3. The local helper runs OCR locally and produces compact observations like
-   `{timestamp_seconds, raw_text, ocr_confidence}`.
-4. The local helper sends those observations to API Gateway / Lambda.
-5. Lambda performs the server-side non-trivial operations:
-   - OCR text normalization + fuzzy player matching
-   - temporal deduplication of repeated detections
-   - highlight grouping / merging
-   - clip-window computation and scoring
-6. Lambda returns the final clip plan as JSON.
-7. The local helper cuts clips locally with `ffmpeg`, generates thumbnails, and
-   serves those artifacts back to the frontend.
+Use:
 
-## Why This Version Fits The Project
+```sql
+worker/schema.sql
+```
 
-- It uses AWS.
-- It has a client-side app to demo the work.
-- The server side consists of a web service plus another component:
-  - API Gateway = web service
-  - Lambda = additional server-side component
-- The server side performs at least 3 distinct non-trivial operations.
+2. Configure the worker.
 
-This version intentionally removes the original full-video upload to S3 and the
-cloud worker queue, because those were the bottlenecks and deployment pain
-points for this project.
+Edit:
 
-## Folder Guide
+```ini
+worker/worker-config.ini
+```
 
-- [frontend/](/Users/rachel/Documents/cs310/final_project/frontend)
-  - Browser UI for submit -> status -> clips flow.
-- [worker/](/Users/rachel/Documents/cs310/final_project/worker)
-  - Local helper service.
-  - Runs OCR and clip cutting on the demo machine.
-- [lambda_functions/highlight_analysis/](/Users/rachel/Documents/cs310/final_project/lambda_functions/highlight_analysis)
-  - Python package to deploy to AWS Lambda.
-  - Contains the server-side analysis logic and Lambda handler.
-- [backend/](/Users/rachel/Documents/cs310/final_project/backend)
-  - Legacy Node/EB files from the earlier cloud-worker design.
-  - Not part of the current recommended architecture.
+Fill in:
 
-## Config Files
+- `[analysis_api] base_url`
+- `[analysis_api] path`
+- `[s3] bucket_name`
+- `[s3] region_name`
+- `[rds] endpoint`
+- `[rds] user_name`
+- `[rds] user_pwd`
+- `[rds] db_name`
 
-Frontend config:
-- [frontend/client-config.ini](/Users/rachel/Documents/cs310/final_project/frontend/client-config.ini)
+3. Configure the frontend.
 
-Local helper / Lambda config examples:
-- [worker/highlights-config.example.ini](/Users/rachel/Documents/cs310/final_project/worker/highlights-config.example.ini)
-- [backend/highlights-config.example.ini](/Users/rachel/Documents/cs310/final_project/backend/highlights-config.example.ini)
+Edit:
 
-The helper reads config from any of:
-- `highlights-config.ini` at the repo root
-- `worker/highlights-config.ini`
-- `backend/highlights-config.ini`
-- `HIGHLIGHTS_CONFIG_PATH`
+```ini
+frontend/client-config.ini
+```
 
-Typical values now are:
-- `analysis_api.base_url`
-- `analysis_api.path`
-- `local_helper.host`
-- `local_helper.port`
-- `local_helper.public_base_url`
-- `pipeline.frame_sample_fps`
+Set `local_helper` to the worker URL, usually:
 
-If `analysis_api.base_url` is left blank, the local helper falls back to the
-same Python analysis package locally. That is useful for development. For the
-final demo, point it at your deployed API Gateway URL.
+```ini
+[client]
+local_helper=http://localhost:4001
+```
 
-## Local Setup
-
-### 1) Worker / Local Helper
+4. Install and start the worker.
 
 ```bash
 cd worker
-python3 -m venv .venv
-source .venv/bin/activate
+python -m venv .venv
+.venv\Scripts\activate
 pip install -r requirements.txt
-cp highlights-config.example.ini highlights-config.ini
 python worker.py
 ```
 
-The local helper starts on `http://localhost:4001` by default.
-
-### 2) Frontend
+5. Install and start the frontend.
 
 ```bash
 cd frontend
@@ -106,48 +77,38 @@ npm install
 npm run dev
 ```
 
-The frontend expects the local helper URL in:
-- [frontend/client-config.ini](/Users/rachel/Documents/cs310/final_project/frontend/client-config.ini)
+## Lambda
 
-Default:
+Deploy `lambda_console.py` to AWS Lambda and connect it to API Gateway.
 
-```ini
-[client]
-local_helper=http://localhost:4001
-```
-
-### 3) Lambda Deployment Folder
-
-The Lambda code is organized in:
-- [lambda_functions/highlight_analysis/handler.py](/Users/rachel/Documents/cs310/final_project/lambda_functions/highlight_analysis/handler.py)
-- [lambda_functions/highlight_analysis/analysis.py](/Users/rachel/Documents/cs310/final_project/lambda_functions/highlight_analysis/analysis.py)
-- [lambda_functions/highlight_analysis/requirements.txt](/Users/rachel/Documents/cs310/final_project/lambda_functions/highlight_analysis/requirements.txt)
-
-Deploy that folder to AWS Lambda behind API Gateway, then set:
+The route in API Gateway must match:
 
 ```ini
 [analysis_api]
-base_url=https://your-api-id.execute-api.us-east-2.amazonaws.com/prod
-path=/analyze
+path=...
 ```
 
-## Demo Notes
+## Tuning Parameters
 
-- One local video at a time.
-- Maximum source-video size is `300 MB`.
-- Source videos never leave the local machine.
-- Finished clips are served from the local helper, not S3.
-- No cloud persistence is assumed in the current design.
+Most processing settings live in:
 
-## Legacy Files
+```ini
+worker/worker-config.ini
+```
 
-The old Elastic Beanstalk / S3 / SQS / RDS path is still present in the repo so
-you do not lose the earlier work, but it is no longer the recommended path for
-this project:
+Useful values to adjust:
 
-- [create.bash](/Users/rachel/Documents/cs310/final_project/create.bash)
-- [update.bash](/Users/rachel/Documents/cs310/final_project/update.bash)
-- [delete.bash](/Users/rachel/Documents/cs310/final_project/delete.bash)
-- [backend/app.js](/Users/rachel/Documents/cs310/final_project/backend/app.js)
+- `frame_sample_fps`: how often frames are sampled
+- `crop_x`, `crop_y`, `crop_w`, `crop_h`: kill-feed crop window
+- `clip_pre_seconds`, `clip_post_seconds`: how much video to save around each event
+- `dedupe_window_seconds`: how aggressively repeated OCR events are collapsed
+- `merge_window_seconds`: how close events must be to merge into one highlight
+- `fuzzy_match_threshold`: player-name match strictness
+- `max_concurrent_jobs`: how many videos can process at once
+- `temp_dir`: local working directory for worker artifacts
 
-The active path now is `frontend -> local helper -> API Gateway/Lambda -> local helper`.
+## Files To Edit Most Often
+
+- `worker/worker-config.ini`
+- `frontend/client-config.ini`
+- `lambda_console.py`

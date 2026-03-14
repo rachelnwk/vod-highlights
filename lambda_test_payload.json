@@ -1,0 +1,1821 @@
+{
+  "playerName": "kwnl",
+  "observations": [
+    {
+      "timestamp_seconds": 15.0,
+      "frame": "frame_000015.jpg",
+      "row_index": 1,
+      "raw_text": "SLUDGEGUY SUSSYSCYLLA",
+      "left_text": "SLUDGEGUY",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.9985
+    },
+    {
+      "timestamp_seconds": 16.0,
+      "frame": "frame_000016.jpg",
+      "row_index": 1,
+      "raw_text": "SLUDGEGUY SUSSYSCYLA",
+      "left_text": "SLUDGEGUY",
+      "right_text": "SUSSYSCYLA",
+      "ocr_confidence": 0.8925
+    },
+    {
+      "timestamp_seconds": 17.0,
+      "frame": "frame_000017.jpg",
+      "row_index": 1,
+      "raw_text": "SLUDGEGUY SUSSYSCYLLA",
+      "left_text": "SLUDGEGUY",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.9985
+    },
+    {
+      "timestamp_seconds": 18.0,
+      "frame": "frame_000018.jpg",
+      "row_index": 1,
+      "raw_text": "SLUDGEGUY SuSSYScYLA",
+      "left_text": "SLUDGEGUY",
+      "right_text": "SuSSYScYLA",
+      "ocr_confidence": 0.9984
+    },
+    {
+      "timestamp_seconds": 19.0,
+      "frame": "frame_000019.jpg",
+      "row_index": 1,
+      "raw_text": "SLUDGEGUY SUSSYScYLa",
+      "left_text": "SLUDGEGUY",
+      "right_text": "SUSSYScYLa",
+      "ocr_confidence": 0.7072
+    },
+    {
+      "timestamp_seconds": 20.0,
+      "frame": "frame_000020.jpg",
+      "row_index": 1,
+      "raw_text": "EL44i",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.0239
+    },
+    {
+      "timestamp_seconds": 20.0,
+      "frame": "frame_000020.jpg",
+      "row_index": 2,
+      "raw_text": "SLUDGEGUY SUSSYSCYLIA",
+      "left_text": "SLUDGEGUY",
+      "right_text": "SUSSYSCYLIA",
+      "ocr_confidence": 0.8693
+    },
+    {
+      "timestamp_seconds": 21.0,
+      "frame": "frame_000021.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL POKIPSY",
+      "left_text": "KWNL",
+      "right_text": "POKIPSY",
+      "ocr_confidence": 0.9907
+    },
+    {
+      "timestamp_seconds": 21.0,
+      "frame": "frame_000021.jpg",
+      "row_index": 2,
+      "raw_text": "FOPDOODLE CHAR25T",
+      "left_text": "FOPDOODLE",
+      "right_text": "CHAR25T",
+      "ocr_confidence": 0.8038
+    },
+    {
+      "timestamp_seconds": 21.0,
+      "frame": "frame_000021.jpg",
+      "row_index": 3,
+      "raw_text": "SLUDGEGUY SUSSYSCYLIA",
+      "left_text": "SLUDGEGUY",
+      "right_text": "SUSSYSCYLIA",
+      "ocr_confidence": 0.9821
+    },
+    {
+      "timestamp_seconds": 22.0,
+      "frame": "frame_000022.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL POKIPSY",
+      "left_text": "KWNL",
+      "right_text": "POKIPSY",
+      "ocr_confidence": 0.9946
+    },
+    {
+      "timestamp_seconds": 22.0,
+      "frame": "frame_000022.jpg",
+      "row_index": 2,
+      "raw_text": "FOPDOODLE CHAR25T",
+      "left_text": "FOPDOODLE",
+      "right_text": "CHAR25T",
+      "ocr_confidence": 0.8223
+    },
+    {
+      "timestamp_seconds": 22.0,
+      "frame": "frame_000022.jpg",
+      "row_index": 3,
+      "raw_text": "SLUDGEGUY SUSSYSCYILA",
+      "left_text": "SLUDGEGUY",
+      "right_text": "SUSSYSCYILA",
+      "ocr_confidence": 0.866
+    },
+    {
+      "timestamp_seconds": 23.0,
+      "frame": "frame_000023.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL POKIPSY'",
+      "left_text": "KWNL",
+      "right_text": "POKIPSY'",
+      "ocr_confidence": 0.8689
+    },
+    {
+      "timestamp_seconds": 23.0,
+      "frame": "frame_000023.jpg",
+      "row_index": 2,
+      "raw_text": "FOPDOODLE CHAR2ST",
+      "left_text": "FOPDOODLE",
+      "right_text": "CHAR2ST",
+      "ocr_confidence": 0.9386
+    },
+    {
+      "timestamp_seconds": 24.0,
+      "frame": "frame_000024.jpg",
+      "row_index": 1,
+      "raw_text": "IKWNL POKIPSY",
+      "left_text": "IKWNL",
+      "right_text": "POKIPSY",
+      "ocr_confidence": 0.9818
+    },
+    {
+      "timestamp_seconds": 24.0,
+      "frame": "frame_000024.jpg",
+      "row_index": 2,
+      "raw_text": "FOPDOOpu CHAR2ST",
+      "left_text": "FOPDOOpu",
+      "right_text": "CHAR2ST",
+      "ocr_confidence": 0.6053
+    },
+    {
+      "timestamp_seconds": 25.0,
+      "frame": "frame_000025.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL POKIPSY",
+      "left_text": "KWNL",
+      "right_text": "POKIPSY",
+      "ocr_confidence": 0.9822
+    },
+    {
+      "timestamp_seconds": 25.0,
+      "frame": "frame_000025.jpg",
+      "row_index": 2,
+      "raw_text": "FOPDOODLE 'CHAR2ST",
+      "left_text": "FOPDOODLE",
+      "right_text": "'CHAR2ST",
+      "ocr_confidence": 0.9297
+    },
+    {
+      "timestamp_seconds": 26.0,
+      "frame": "frame_000026.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL POKIPSY",
+      "left_text": "KWNL",
+      "right_text": "POKIPSY",
+      "ocr_confidence": 0.9609
+    },
+    {
+      "timestamp_seconds": 26.0,
+      "frame": "frame_000026.jpg",
+      "row_index": 2,
+      "raw_text": "FOPDOODU CHAR25T",
+      "left_text": "FOPDOODU",
+      "right_text": "CHAR25T",
+      "ocr_confidence": 0.9344
+    },
+    {
+      "timestamp_seconds": 27.0,
+      "frame": "frame_000027.jpg",
+      "row_index": 1,
+      "raw_text": "FERGUS KWNL",
+      "left_text": "FERGUS",
+      "right_text": "KWNL",
+      "ocr_confidence": 0.5155
+    },
+    {
+      "timestamp_seconds": 27.0,
+      "frame": "frame_000027.jpg",
+      "row_index": 2,
+      "raw_text": "IKWNL POKIPSY",
+      "left_text": "IKWNL",
+      "right_text": "POKIPSY",
+      "ocr_confidence": 0.997
+    },
+    {
+      "timestamp_seconds": 27.0,
+      "frame": "frame_000027.jpg",
+      "row_index": 3,
+      "raw_text": "FOPDOODLE CHAR2ST",
+      "left_text": "FOPDOODLE",
+      "right_text": "CHAR2ST",
+      "ocr_confidence": 0.9283
+    },
+    {
+      "timestamp_seconds": 28.0,
+      "frame": "frame_000028.jpg",
+      "row_index": 1,
+      "raw_text": "FERGUS KWNI",
+      "left_text": "FERGUS",
+      "right_text": "KWNI",
+      "ocr_confidence": 0.829
+    },
+    {
+      "timestamp_seconds": 29.0,
+      "frame": "frame_000029.jpg",
+      "row_index": 1,
+      "raw_text": "PREV RESPAWN IN 10",
+      "left_text": "PREV",
+      "right_text": "RESPAWN IN 10",
+      "ocr_confidence": 0.9971
+    },
+    {
+      "timestamp_seconds": 29.0,
+      "frame": "frame_000029.jpg",
+      "row_index": 2,
+      "raw_text": "FERGUS KWNL",
+      "left_text": "FERGUS",
+      "right_text": "KWNL",
+      "ocr_confidence": 0.9987
+    },
+    {
+      "timestamp_seconds": 30.0,
+      "frame": "frame_000030.jpg",
+      "row_index": 1,
+      "raw_text": "HYBRID | KING'S ROW TIME: 0.23",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.8784
+    },
+    {
+      "timestamp_seconds": 30.0,
+      "frame": "frame_000030.jpg",
+      "row_index": 2,
+      "raw_text": "MATCH RANK RANGE:",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.8909
+    },
+    {
+      "timestamp_seconds": 30.0,
+      "frame": "frame_000030.jpg",
+      "row_index": 3,
+      "raw_text": "01 -MTT",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.1836
+    },
+    {
+      "timestamp_seconds": 31.0,
+      "frame": "frame_000031.jpg",
+      "row_index": 1,
+      "raw_text": "HYBRID | KING'S ROW TIME: 0.24",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.8681
+    },
+    {
+      "timestamp_seconds": 31.0,
+      "frame": "frame_000031.jpg",
+      "row_index": 2,
+      "raw_text": "MATCH RANK RANGE:",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.9706
+    },
+    {
+      "timestamp_seconds": 31.0,
+      "frame": "frame_000031.jpg",
+      "row_index": 3,
+      "raw_text": "Q 1=MI at",
+      "left_text": "Q 1=MI",
+      "right_text": "at",
+      "ocr_confidence": 0.0754
+    },
+    {
+      "timestamp_seconds": 32.0,
+      "frame": "frame_000032.jpg",
+      "row_index": 1,
+      "raw_text": "PRFV RESPAWN IN",
+      "left_text": "PRFV",
+      "right_text": "RESPAWN IN",
+      "ocr_confidence": 0.881
+    },
+    {
+      "timestamp_seconds": 32.0,
+      "frame": "frame_000032.jpg",
+      "row_index": 2,
+      "raw_text": "FERGUS KWNLI",
+      "left_text": "FERGUS",
+      "right_text": "KWNLI",
+      "ocr_confidence": 0.9889
+    },
+    {
+      "timestamp_seconds": 33.0,
+      "frame": "frame_000033.jpg",
+      "row_index": 1,
+      "raw_text": "PREV RESPAWN IN",
+      "left_text": "PREV",
+      "right_text": "RESPAWN IN",
+      "ocr_confidence": 0.8723
+    },
+    {
+      "timestamp_seconds": 33.0,
+      "frame": "frame_000033.jpg",
+      "row_index": 2,
+      "raw_text": "FERGUS KWNL",
+      "left_text": "FERGUS",
+      "right_text": "KWNL",
+      "ocr_confidence": 0.9973
+    },
+    {
+      "timestamp_seconds": 34.0,
+      "frame": "frame_000034.jpg",
+      "row_index": 1,
+      "raw_text": "HYBRID | KING'S ROW TIME: 0.27",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.9044
+    },
+    {
+      "timestamp_seconds": 34.0,
+      "frame": "frame_000034.jpg",
+      "row_index": 2,
+      "raw_text": "MATCH RANK RANGE:",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.9966
+    },
+    {
+      "timestamp_seconds": 35.0,
+      "frame": "frame_000035.jpg",
+      "row_index": 1,
+      "raw_text": "PREV RESPAWN IK 2",
+      "left_text": "PREV",
+      "right_text": "RESPAWN IK 2",
+      "ocr_confidence": 1.0
+    },
+    {
+      "timestamp_seconds": 40.0,
+      "frame": "frame_000040.jpg",
+      "row_index": 1,
+      "raw_text": "IGOOpGUY COMMIEWACKER",
+      "left_text": "IGOOpGUY",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.918
+    },
+    {
+      "timestamp_seconds": 41.0,
+      "frame": "frame_000041.jpg",
+      "row_index": 1,
+      "raw_text": "IGOOpGUY COMMIEWACKER",
+      "left_text": "IGOOpGUY",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.6965
+    },
+    {
+      "timestamp_seconds": 42.0,
+      "frame": "frame_000042.jpg",
+      "row_index": 1,
+      "raw_text": "GOODGUY COMMIEWACKER",
+      "left_text": "GOODGUY",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.7905
+    },
+    {
+      "timestamp_seconds": 43.0,
+      "frame": "frame_000043.jpg",
+      "row_index": 1,
+      "raw_text": "GOODGUY COMMIEWACKER",
+      "left_text": "GOODGUY",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9674
+    },
+    {
+      "timestamp_seconds": 44.0,
+      "frame": "frame_000044.jpg",
+      "row_index": 1,
+      "raw_text": "SUSSYSCYLLA COMMIEWACKER",
+      "left_text": "SUSSYSCYLLA",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9832
+    },
+    {
+      "timestamp_seconds": 44.0,
+      "frame": "frame_000044.jpg",
+      "row_index": 2,
+      "raw_text": "GOODGUY COMMIEWACKER",
+      "left_text": "GOODGUY",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9867
+    },
+    {
+      "timestamp_seconds": 45.0,
+      "frame": "frame_000045.jpg",
+      "row_index": 1,
+      "raw_text": "SUSSYSCYILA COMMIEWACKER",
+      "left_text": "SUSSYSCYILA",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9949
+    },
+    {
+      "timestamp_seconds": 45.0,
+      "frame": "frame_000045.jpg",
+      "row_index": 2,
+      "raw_text": "GOODGUY COMMIEWACKER",
+      "left_text": "GOODGUY",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9923
+    },
+    {
+      "timestamp_seconds": 46.0,
+      "frame": "frame_000046.jpg",
+      "row_index": 1,
+      "raw_text": "SUSSYSCYLLA COMMIEWACKER",
+      "left_text": "SUSSYSCYLLA",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9085
+    },
+    {
+      "timestamp_seconds": 46.0,
+      "frame": "frame_000046.jpg",
+      "row_index": 2,
+      "raw_text": "CGCODGuy COMMIEWACKFR",
+      "left_text": "CGCODGuy",
+      "right_text": "COMMIEWACKFR",
+      "ocr_confidence": 0.6694
+    },
+    {
+      "timestamp_seconds": 47.0,
+      "frame": "frame_000047.jpg",
+      "row_index": 1,
+      "raw_text": "SUSSYSCYLLA COMMIEWACKER",
+      "left_text": "SUSSYSCYLLA",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9968
+    },
+    {
+      "timestamp_seconds": 47.0,
+      "frame": "frame_000047.jpg",
+      "row_index": 2,
+      "raw_text": "GOODGUY COMMIEWACKFR",
+      "left_text": "GOODGUY",
+      "right_text": "COMMIEWACKFR",
+      "ocr_confidence": 0.8784
+    },
+    {
+      "timestamp_seconds": 48.0,
+      "frame": "frame_000048.jpg",
+      "row_index": 1,
+      "raw_text": "SLUDGEGUY SUSSYSCYlA",
+      "left_text": "SLUDGEGUY",
+      "right_text": "SUSSYSCYlA",
+      "ocr_confidence": 0.9572
+    },
+    {
+      "timestamp_seconds": 48.0,
+      "frame": "frame_000048.jpg",
+      "row_index": 2,
+      "raw_text": "SUSS YSCYLLA COMMIEWACKER",
+      "left_text": "SUSS YSCYLLA",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9348
+    },
+    {
+      "timestamp_seconds": 49.0,
+      "frame": "frame_000049.jpg",
+      "row_index": 1,
+      "raw_text": "SLUDGEGUY SUSSYSCYLA",
+      "left_text": "SLUDGEGUY",
+      "right_text": "SUSSYSCYLA",
+      "ocr_confidence": 0.9846
+    },
+    {
+      "timestamp_seconds": 49.0,
+      "frame": "frame_000049.jpg",
+      "row_index": 2,
+      "raw_text": "SUSSYSCYILA COMMIEWACKER",
+      "left_text": "SUSSYSCYILA",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9588
+    },
+    {
+      "timestamp_seconds": 50.0,
+      "frame": "frame_000050.jpg",
+      "row_index": 1,
+      "raw_text": "'SLUDGEGUY SUSSYSCYllx",
+      "left_text": "'SLUDGEGUY",
+      "right_text": "SUSSYSCYllx",
+      "ocr_confidence": 0.6921
+    },
+    {
+      "timestamp_seconds": 50.0,
+      "frame": "frame_000050.jpg",
+      "row_index": 2,
+      "raw_text": "SUSSYSCYLLA COMMIEWACKER",
+      "left_text": "SUSSYSCYLLA",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.8595
+    },
+    {
+      "timestamp_seconds": 51.0,
+      "frame": "frame_000051.jpg",
+      "row_index": 1,
+      "raw_text": "SLUDGEGUY SUSSYSCYLtA",
+      "left_text": "SLUDGEGUY",
+      "right_text": "SUSSYSCYLtA",
+      "ocr_confidence": 0.9917
+    },
+    {
+      "timestamp_seconds": 52.0,
+      "frame": "frame_000052.jpg",
+      "row_index": 1,
+      "raw_text": "'SLUUDGEGUY SUSSYSCYIla",
+      "left_text": "'SLUUDGEGUY",
+      "right_text": "SUSSYSCYIla",
+      "ocr_confidence": 0.474
+    },
+    {
+      "timestamp_seconds": 52.0,
+      "frame": "frame_000052.jpg",
+      "row_index": 2,
+      "raw_text": "8",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.9176
+    },
+    {
+      "timestamp_seconds": 53.0,
+      "frame": "frame_000053.jpg",
+      "row_index": 1,
+      "raw_text": "SLUDGEGUY SUSSYScYLa",
+      "left_text": "SLUDGEGUY",
+      "right_text": "SUSSYScYLa",
+      "ocr_confidence": 0.9886
+    },
+    {
+      "timestamp_seconds": 54.0,
+      "frame": "frame_000054.jpg",
+      "row_index": 1,
+      "raw_text": "ISLUDGEGUY susSYscYila",
+      "left_text": "ISLUDGEGUY",
+      "right_text": "susSYscYila",
+      "ocr_confidence": 0.6521
+    },
+    {
+      "timestamp_seconds": 55.0,
+      "frame": "frame_000055.jpg",
+      "row_index": 1,
+      "raw_text": "SLUDGEGUY FOPDOODL",
+      "left_text": "SLUDGEGUY",
+      "right_text": "FOPDOODL",
+      "ocr_confidence": 0.9902
+    },
+    {
+      "timestamp_seconds": 55.0,
+      "frame": "frame_000055.jpg",
+      "row_index": 2,
+      "raw_text": "'SLUDGEGUY SUSSYSCYLIN",
+      "left_text": "'SLUDGEGUY",
+      "right_text": "SUSSYSCYLIN",
+      "ocr_confidence": 0.6892
+    },
+    {
+      "timestamp_seconds": 55.0,
+      "frame": "frame_000055.jpg",
+      "row_index": 3,
+      "raw_text": "SPE",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.9954
+    },
+    {
+      "timestamp_seconds": 56.0,
+      "frame": "frame_000056.jpg",
+      "row_index": 1,
+      "raw_text": "~SLUDGEGUY FOPDOOul",
+      "left_text": "~SLUDGEGUY",
+      "right_text": "FOPDOOul",
+      "ocr_confidence": 0.4623
+    },
+    {
+      "timestamp_seconds": 57.0,
+      "frame": "frame_000057.jpg",
+      "row_index": 1,
+      "raw_text": "SLUDGEGUY FOPDaOuL",
+      "left_text": "SLUDGEGUY",
+      "right_text": "FOPDaOuL",
+      "ocr_confidence": 0.9752
+    },
+    {
+      "timestamp_seconds": 58.0,
+      "frame": "frame_000058.jpg",
+      "row_index": 1,
+      "raw_text": "TERGUS FOPDOODIE",
+      "left_text": "TERGUS",
+      "right_text": "FOPDOODIE",
+      "ocr_confidence": 0.8098
+    },
+    {
+      "timestamp_seconds": 58.0,
+      "frame": "frame_000058.jpg",
+      "row_index": 2,
+      "raw_text": "SLUDGEGUY FOPDOODle",
+      "left_text": "SLUDGEGUY",
+      "right_text": "FOPDOODle",
+      "ocr_confidence": 0.9696
+    },
+    {
+      "timestamp_seconds": 59.0,
+      "frame": "frame_000059.jpg",
+      "row_index": 1,
+      "raw_text": "GOODGUY SLUDGEGUY",
+      "left_text": "GOODGUY",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.993
+    },
+    {
+      "timestamp_seconds": 59.0,
+      "frame": "frame_000059.jpg",
+      "row_index": 2,
+      "raw_text": "FERGUS FOPDOODLE",
+      "left_text": "FERGUS",
+      "right_text": "FOPDOODLE",
+      "ocr_confidence": 0.913
+    },
+    {
+      "timestamp_seconds": 59.0,
+      "frame": "frame_000059.jpg",
+      "row_index": 3,
+      "raw_text": "SLUDGEGUY TOPDOODLE",
+      "left_text": "SLUDGEGUY",
+      "right_text": "TOPDOODLE",
+      "ocr_confidence": 0.9984
+    },
+    {
+      "timestamp_seconds": 60.0,
+      "frame": "frame_000060.jpg",
+      "row_index": 1,
+      "raw_text": "GOODGUY SLUDGEGUY",
+      "left_text": "GOODGUY",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9762
+    },
+    {
+      "timestamp_seconds": 60.0,
+      "frame": "frame_000060.jpg",
+      "row_index": 2,
+      "raw_text": "~FERCUS FOPDOODLE",
+      "left_text": "~FERCUS",
+      "right_text": "FOPDOODLE",
+      "ocr_confidence": 0.9237
+    },
+    {
+      "timestamp_seconds": 60.0,
+      "frame": "frame_000060.jpg",
+      "row_index": 3,
+      "raw_text": "SLUDGEGUY TOPDOODLE",
+      "left_text": "SLUDGEGUY",
+      "right_text": "TOPDOODLE",
+      "ocr_confidence": 0.9988
+    },
+    {
+      "timestamp_seconds": 61.0,
+      "frame": "frame_000061.jpg",
+      "row_index": 1,
+      "raw_text": "GOODGUY SLUDGEGUY",
+      "left_text": "GOODGUY",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.982
+    },
+    {
+      "timestamp_seconds": 61.0,
+      "frame": "frame_000061.jpg",
+      "row_index": 2,
+      "raw_text": "FERGUS FOPDOODL",
+      "left_text": "FERGUS",
+      "right_text": "FOPDOODL",
+      "ocr_confidence": 0.9527
+    },
+    {
+      "timestamp_seconds": 61.0,
+      "frame": "frame_000061.jpg",
+      "row_index": 3,
+      "raw_text": "SLUDGEGUY TOPDOODLE",
+      "left_text": "SLUDGEGUY",
+      "right_text": "TOPDOODLE",
+      "ocr_confidence": 0.9972
+    },
+    {
+      "timestamp_seconds": 62.0,
+      "frame": "frame_000062.jpg",
+      "row_index": 1,
+      "raw_text": "GOODGUY SLUDGEGUY",
+      "left_text": "GOODGUY",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9815
+    },
+    {
+      "timestamp_seconds": 62.0,
+      "frame": "frame_000062.jpg",
+      "row_index": 2,
+      "raw_text": "FERGUS FOPDOODLE",
+      "left_text": "FERGUS",
+      "right_text": "FOPDOODLE",
+      "ocr_confidence": 0.9222
+    },
+    {
+      "timestamp_seconds": 63.0,
+      "frame": "frame_000063.jpg",
+      "row_index": 1,
+      "raw_text": "GOODGUY SLUDGEGUY",
+      "left_text": "GOODGUY",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9922
+    },
+    {
+      "timestamp_seconds": 63.0,
+      "frame": "frame_000063.jpg",
+      "row_index": 2,
+      "raw_text": "FFERGUS FOPDOOULE",
+      "left_text": "FFERGUS",
+      "right_text": "FOPDOOULE",
+      "ocr_confidence": 0.762
+    },
+    {
+      "timestamp_seconds": 64.0,
+      "frame": "frame_000064.jpg",
+      "row_index": 1,
+      "raw_text": "GOODGUY SLUDGEGUY",
+      "left_text": "GOODGUY",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9741
+    },
+    {
+      "timestamp_seconds": 64.0,
+      "frame": "frame_000064.jpg",
+      "row_index": 2,
+      "raw_text": "(FERGUS FOPDOODLE",
+      "left_text": "(FERGUS",
+      "right_text": "FOPDOODLE",
+      "ocr_confidence": 0.7734
+    },
+    {
+      "timestamp_seconds": 65.0,
+      "frame": "frame_000065.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL COWBOY",
+      "left_text": "KWNL",
+      "right_text": "COWBOY",
+      "ocr_confidence": 0.9153
+    },
+    {
+      "timestamp_seconds": 65.0,
+      "frame": "frame_000065.jpg",
+      "row_index": 2,
+      "raw_text": "GOOpGuy SLUDGEGUY",
+      "left_text": "GOOpGuy",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9953
+    },
+    {
+      "timestamp_seconds": 66.0,
+      "frame": "frame_000066.jpg",
+      "row_index": 1,
+      "raw_text": "'KWNL COWBOY",
+      "left_text": "'KWNL",
+      "right_text": "COWBOY",
+      "ocr_confidence": 0.7812
+    },
+    {
+      "timestamp_seconds": 67.0,
+      "frame": "frame_000067.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL COWBOY",
+      "left_text": "KWNL",
+      "right_text": "COWBOY",
+      "ocr_confidence": 0.9329
+    },
+    {
+      "timestamp_seconds": 68.0,
+      "frame": "frame_000068.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL COWBOY",
+      "left_text": "KWNL",
+      "right_text": "COWBOY",
+      "ocr_confidence": 0.9799
+    },
+    {
+      "timestamp_seconds": 69.0,
+      "frame": "frame_000069.jpg",
+      "row_index": 1,
+      "raw_text": "KWNI COWBOY",
+      "left_text": "KWNI",
+      "right_text": "COWBOY",
+      "ocr_confidence": 0.9688
+    },
+    {
+      "timestamp_seconds": 70.0,
+      "frame": "frame_000070.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL COWBOY",
+      "left_text": "KWNL",
+      "right_text": "COWBOY",
+      "ocr_confidence": 0.9711
+    },
+    {
+      "timestamp_seconds": 71.0,
+      "frame": "frame_000071.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL COWBOY",
+      "left_text": "KWNL",
+      "right_text": "COWBOY",
+      "ocr_confidence": 0.9697
+    },
+    {
+      "timestamp_seconds": 72.0,
+      "frame": "frame_000072.jpg",
+      "row_index": 1,
+      "raw_text": "POKIPSY SUSSYSCYLLA",
+      "left_text": "POKIPSY",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.9988
+    },
+    {
+      "timestamp_seconds": 72.0,
+      "frame": "frame_000072.jpg",
+      "row_index": 2,
+      "raw_text": "Kdeon",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.0322
+    },
+    {
+      "timestamp_seconds": 73.0,
+      "frame": "frame_000073.jpg",
+      "row_index": 1,
+      "raw_text": "POKIPSY SUSSYScYLA",
+      "left_text": "POKIPSY",
+      "right_text": "SUSSYScYLA",
+      "ocr_confidence": 0.9993
+    },
+    {
+      "timestamp_seconds": 74.0,
+      "frame": "frame_000074.jpg",
+      "row_index": 1,
+      "raw_text": "POKIPSY SUSSYSCYLA",
+      "left_text": "POKIPSY",
+      "right_text": "SUSSYSCYLA",
+      "ocr_confidence": 0.9988
+    },
+    {
+      "timestamp_seconds": 75.0,
+      "frame": "frame_000075.jpg",
+      "row_index": 1,
+      "raw_text": "POKIPSY SUSSYScYLA",
+      "left_text": "POKIPSY",
+      "right_text": "SUSSYScYLA",
+      "ocr_confidence": 0.9993
+    },
+    {
+      "timestamp_seconds": 76.0,
+      "frame": "frame_000076.jpg",
+      "row_index": 1,
+      "raw_text": "POKIPSY SUSSYSCYLA",
+      "left_text": "POKIPSY",
+      "right_text": "SUSSYSCYLA",
+      "ocr_confidence": 0.8447
+    },
+    {
+      "timestamp_seconds": 77.0,
+      "frame": "frame_000077.jpg",
+      "row_index": 1,
+      "raw_text": "POKIPSY SUSSYScYLa",
+      "left_text": "POKIPSY",
+      "right_text": "SUSSYScYLa",
+      "ocr_confidence": 0.9985
+    },
+    {
+      "timestamp_seconds": 78.0,
+      "frame": "frame_000078.jpg",
+      "row_index": 1,
+      "raw_text": "REDFROST SUSSYScYitat",
+      "left_text": "REDFROST",
+      "right_text": "SUSSYScYitat",
+      "ocr_confidence": 0.5424
+    },
+    {
+      "timestamp_seconds": 78.0,
+      "frame": "frame_000078.jpg",
+      "row_index": 2,
+      "raw_text": "POKIPSY SUSSYSCYLLAS",
+      "left_text": "POKIPSY",
+      "right_text": "SUSSYSCYLLAS",
+      "ocr_confidence": 0.862
+    },
+    {
+      "timestamp_seconds": 79.0,
+      "frame": "frame_000079.jpg",
+      "row_index": 1,
+      "raw_text": "'TERGUS GoodGUY",
+      "left_text": "'TERGUS",
+      "right_text": "GoodGUY",
+      "ocr_confidence": 0.5831
+    },
+    {
+      "timestamp_seconds": 79.0,
+      "frame": "frame_000079.jpg",
+      "row_index": 2,
+      "raw_text": "REDFROST SUSSYSCYLLA",
+      "left_text": "REDFROST",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.9405
+    },
+    {
+      "timestamp_seconds": 79.0,
+      "frame": "frame_000079.jpg",
+      "row_index": 3,
+      "raw_text": "POKIPSY SUSSYSCYLIA",
+      "left_text": "POKIPSY",
+      "right_text": "SUSSYSCYLIA",
+      "ocr_confidence": 0.9828
+    },
+    {
+      "timestamp_seconds": 80.0,
+      "frame": "frame_000080.jpg",
+      "row_index": 1,
+      "raw_text": "'FERGUS GOODGUY",
+      "left_text": "'FERGUS",
+      "right_text": "GOODGUY",
+      "ocr_confidence": 0.7799
+    },
+    {
+      "timestamp_seconds": 80.0,
+      "frame": "frame_000080.jpg",
+      "row_index": 2,
+      "raw_text": "REDRROST SUSSYSCYLLA",
+      "left_text": "REDRROST",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.9855
+    },
+    {
+      "timestamp_seconds": 81.0,
+      "frame": "frame_000081.jpg",
+      "row_index": 1,
+      "raw_text": "TERGUS GOODGUY",
+      "left_text": "TERGUS",
+      "right_text": "GOODGUY",
+      "ocr_confidence": 0.9733
+    },
+    {
+      "timestamp_seconds": 81.0,
+      "frame": "frame_000081.jpg",
+      "row_index": 2,
+      "raw_text": "REDFROST SUSSYSCYLLA",
+      "left_text": "REDFROST",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.8666
+    },
+    {
+      "timestamp_seconds": 82.0,
+      "frame": "frame_000082.jpg",
+      "row_index": 1,
+      "raw_text": "FERGUS GOODGUY",
+      "left_text": "FERGUS",
+      "right_text": "GOODGUY",
+      "ocr_confidence": 0.982
+    },
+    {
+      "timestamp_seconds": 82.0,
+      "frame": "frame_000082.jpg",
+      "row_index": 2,
+      "raw_text": "IREDRROST SUSSYSCYLLA",
+      "left_text": "IREDRROST",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.9844
+    },
+    {
+      "timestamp_seconds": 83.0,
+      "frame": "frame_000083.jpg",
+      "row_index": 1,
+      "raw_text": "FERGUS GoodGUY",
+      "left_text": "FERGUS",
+      "right_text": "GoodGUY",
+      "ocr_confidence": 0.7466
+    },
+    {
+      "timestamp_seconds": 83.0,
+      "frame": "frame_000083.jpg",
+      "row_index": 2,
+      "raw_text": "IPEDFROST SUSSYSCYLLA",
+      "left_text": "IPEDFROST",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.9958
+    },
+    {
+      "timestamp_seconds": 84.0,
+      "frame": "frame_000084.jpg",
+      "row_index": 1,
+      "raw_text": "COMMIEWACKER SUSSYSCYLLA",
+      "left_text": "COMMIEWACKER",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.9975
+    },
+    {
+      "timestamp_seconds": 84.0,
+      "frame": "frame_000084.jpg",
+      "row_index": 2,
+      "raw_text": "FERGUS GOODGUY",
+      "left_text": "FERGUS",
+      "right_text": "GOODGUY",
+      "ocr_confidence": 0.9989
+    },
+    {
+      "timestamp_seconds": 84.0,
+      "frame": "frame_000084.jpg",
+      "row_index": 3,
+      "raw_text": "IREDFROST SUSSYSCYLIA",
+      "left_text": "IREDFROST",
+      "right_text": "SUSSYSCYLIA",
+      "ocr_confidence": 0.6853
+    },
+    {
+      "timestamp_seconds": 85.0,
+      "frame": "frame_000085.jpg",
+      "row_index": 1,
+      "raw_text": "\"IcWNI FERGUS",
+      "left_text": "\"IcWNI",
+      "right_text": "FERGUS",
+      "ocr_confidence": 0.783
+    },
+    {
+      "timestamp_seconds": 85.0,
+      "frame": "frame_000085.jpg",
+      "row_index": 2,
+      "raw_text": "COMMIEWACKER SUSSYSCYLLA",
+      "left_text": "COMMIEWACKER",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.9906
+    },
+    {
+      "timestamp_seconds": 85.0,
+      "frame": "frame_000085.jpg",
+      "row_index": 3,
+      "raw_text": "FERGUS GOODGUY",
+      "left_text": "FERGUS",
+      "right_text": "GOODGUY",
+      "ocr_confidence": 0.9972
+    },
+    {
+      "timestamp_seconds": 85.0,
+      "frame": "frame_000085.jpg",
+      "row_index": 4,
+      "raw_text": "IREDFROST SUSSYSCYLLA",
+      "left_text": "IREDFROST",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.9901
+    },
+    {
+      "timestamp_seconds": 86.0,
+      "frame": "frame_000086.jpg",
+      "row_index": 1,
+      "raw_text": "IcWNI FERGUS",
+      "left_text": "IcWNI",
+      "right_text": "FERGUS",
+      "ocr_confidence": 0.5176
+    },
+    {
+      "timestamp_seconds": 86.0,
+      "frame": "frame_000086.jpg",
+      "row_index": 2,
+      "raw_text": "COMMIEWACKER SUSSYSCYLLA",
+      "left_text": "COMMIEWACKER",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.9962
+    },
+    {
+      "timestamp_seconds": 87.0,
+      "frame": "frame_000087.jpg",
+      "row_index": 1,
+      "raw_text": "KWNi FERGUS",
+      "left_text": "KWNi",
+      "right_text": "FERGUS",
+      "ocr_confidence": 0.7255
+    },
+    {
+      "timestamp_seconds": 87.0,
+      "frame": "frame_000087.jpg",
+      "row_index": 2,
+      "raw_text": "COMMIEWACKER SUSSYSCYLLA",
+      "left_text": "COMMIEWACKER",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.9683
+    },
+    {
+      "timestamp_seconds": 88.0,
+      "frame": "frame_000088.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL CHAR2ST",
+      "left_text": "KWNL",
+      "right_text": "CHAR2ST",
+      "ocr_confidence": 0.8684
+    },
+    {
+      "timestamp_seconds": 88.0,
+      "frame": "frame_000088.jpg",
+      "row_index": 2,
+      "raw_text": "CHAR2ST FOPDOODIE",
+      "left_text": "CHAR2ST",
+      "right_text": "FOPDOODIE",
+      "ocr_confidence": 0.8686
+    },
+    {
+      "timestamp_seconds": 88.0,
+      "frame": "frame_000088.jpg",
+      "row_index": 3,
+      "raw_text": "KWN FERGUS",
+      "left_text": "KWN",
+      "right_text": "FERGUS",
+      "ocr_confidence": 0.7593
+    },
+    {
+      "timestamp_seconds": 88.0,
+      "frame": "frame_000088.jpg",
+      "row_index": 4,
+      "raw_text": "COMMIEWACKER SUSSYSCYLLA,",
+      "left_text": "COMMIEWACKER",
+      "right_text": "SUSSYSCYLLA,",
+      "ocr_confidence": 0.986
+    },
+    {
+      "timestamp_seconds": 89.0,
+      "frame": "frame_000089.jpg",
+      "row_index": 1,
+      "raw_text": "WNL CHAR2ST",
+      "left_text": "WNL",
+      "right_text": "CHAR2ST",
+      "ocr_confidence": 0.8873
+    },
+    {
+      "timestamp_seconds": 89.0,
+      "frame": "frame_000089.jpg",
+      "row_index": 2,
+      "raw_text": "CHAR2ST FOPpOODLE",
+      "left_text": "CHAR2ST",
+      "right_text": "FOPpOODLE",
+      "ocr_confidence": 0.805
+    },
+    {
+      "timestamp_seconds": 89.0,
+      "frame": "frame_000089.jpg",
+      "row_index": 3,
+      "raw_text": "KWNL FERGUS",
+      "left_text": "KWNL",
+      "right_text": "FERGUS",
+      "ocr_confidence": 0.8747
+    },
+    {
+      "timestamp_seconds": 89.0,
+      "frame": "frame_000089.jpg",
+      "row_index": 4,
+      "raw_text": "COMMIEWACKER SUSSYSCYLLA",
+      "left_text": "COMMIEWACKER",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.976
+    },
+    {
+      "timestamp_seconds": 90.0,
+      "frame": "frame_000090.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL CHARZST",
+      "left_text": "KWNL",
+      "right_text": "CHARZST",
+      "ocr_confidence": 0.6171
+    },
+    {
+      "timestamp_seconds": 90.0,
+      "frame": "frame_000090.jpg",
+      "row_index": 2,
+      "raw_text": "CHAR2ST FOPDOODIE",
+      "left_text": "CHAR2ST",
+      "right_text": "FOPDOODIE",
+      "ocr_confidence": 0.955
+    },
+    {
+      "timestamp_seconds": 90.0,
+      "frame": "frame_000090.jpg",
+      "row_index": 3,
+      "raw_text": "KWNL FERCUS",
+      "left_text": "KWNL",
+      "right_text": "FERCUS",
+      "ocr_confidence": 0.7342
+    },
+    {
+      "timestamp_seconds": 90.0,
+      "frame": "frame_000090.jpg",
+      "row_index": 4,
+      "raw_text": "COMMIEWACKER SUSSYSCYLLA",
+      "left_text": "COMMIEWACKER",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.9849
+    },
+    {
+      "timestamp_seconds": 91.0,
+      "frame": "frame_000091.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL CHARZST",
+      "left_text": "KWNL",
+      "right_text": "CHARZST",
+      "ocr_confidence": 0.9269
+    },
+    {
+      "timestamp_seconds": 91.0,
+      "frame": "frame_000091.jpg",
+      "row_index": 2,
+      "raw_text": "CHAR2ST FOPDOODLE",
+      "left_text": "CHAR2ST",
+      "right_text": "FOPDOODLE",
+      "ocr_confidence": 0.7726
+    },
+    {
+      "timestamp_seconds": 91.0,
+      "frame": "frame_000091.jpg",
+      "row_index": 3,
+      "raw_text": "IcWNI FERGUS",
+      "left_text": "IcWNI",
+      "right_text": "FERGUS",
+      "ocr_confidence": 0.5671
+    },
+    {
+      "timestamp_seconds": 91.0,
+      "frame": "frame_000091.jpg",
+      "row_index": 4,
+      "raw_text": "COMMIEWACKER SUSSYSCYLLA",
+      "left_text": "COMMIEWACKER",
+      "right_text": "SUSSYSCYLLA",
+      "ocr_confidence": 0.9898
+    },
+    {
+      "timestamp_seconds": 92.0,
+      "frame": "frame_000092.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL COMMIEWACKER",
+      "left_text": "KWNL",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9955
+    },
+    {
+      "timestamp_seconds": 92.0,
+      "frame": "frame_000092.jpg",
+      "row_index": 2,
+      "raw_text": "KWNL CHAR25T",
+      "left_text": "KWNL",
+      "right_text": "CHAR25T",
+      "ocr_confidence": 0.9804
+    },
+    {
+      "timestamp_seconds": 92.0,
+      "frame": "frame_000092.jpg",
+      "row_index": 3,
+      "raw_text": "CHAR25T TOPDOODLE",
+      "left_text": "CHAR25T",
+      "right_text": "TOPDOODLE",
+      "ocr_confidence": 0.9697
+    },
+    {
+      "timestamp_seconds": 93.0,
+      "frame": "frame_000093.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL COMMIEWACKER",
+      "left_text": "KWNL",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.977
+    },
+    {
+      "timestamp_seconds": 93.0,
+      "frame": "frame_000093.jpg",
+      "row_index": 2,
+      "raw_text": "KWNL CHAR25T",
+      "left_text": "KWNL",
+      "right_text": "CHAR25T",
+      "ocr_confidence": 0.9291
+    },
+    {
+      "timestamp_seconds": 93.0,
+      "frame": "frame_000093.jpg",
+      "row_index": 3,
+      "raw_text": "~CHAR2ST TOPDOODLE",
+      "left_text": "~CHAR2ST",
+      "right_text": "TOPDOODLE",
+      "ocr_confidence": 0.9445
+    },
+    {
+      "timestamp_seconds": 94.0,
+      "frame": "frame_000094.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL COMMIEWACKER",
+      "left_text": "KWNL",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.989
+    },
+    {
+      "timestamp_seconds": 94.0,
+      "frame": "frame_000094.jpg",
+      "row_index": 2,
+      "raw_text": "KWNU CHAR2ST",
+      "left_text": "KWNU",
+      "right_text": "CHAR2ST",
+      "ocr_confidence": 0.9301
+    },
+    {
+      "timestamp_seconds": 94.0,
+      "frame": "frame_000094.jpg",
+      "row_index": 3,
+      "raw_text": "CHAR2ST TOPDOODLE",
+      "left_text": "CHAR2ST",
+      "right_text": "TOPDOODLE",
+      "ocr_confidence": 0.9244
+    },
+    {
+      "timestamp_seconds": 95.0,
+      "frame": "frame_000095.jpg",
+      "row_index": 1,
+      "raw_text": "sluboerui",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.0513
+    },
+    {
+      "timestamp_seconds": 95.0,
+      "frame": "frame_000095.jpg",
+      "row_index": 2,
+      "raw_text": "WNL COMMIEWACKER",
+      "left_text": "WNL",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9048
+    },
+    {
+      "timestamp_seconds": 95.0,
+      "frame": "frame_000095.jpg",
+      "row_index": 3,
+      "raw_text": "IKWNL CHAR2ST",
+      "left_text": "IKWNL",
+      "right_text": "CHAR2ST",
+      "ocr_confidence": 0.6589
+    },
+    {
+      "timestamp_seconds": 96.0,
+      "frame": "frame_000096.jpg",
+      "row_index": 1,
+      "raw_text": "ROPDQODLE SLUDGEGUY",
+      "left_text": "ROPDQODLE",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.8911
+    },
+    {
+      "timestamp_seconds": 96.0,
+      "frame": "frame_000096.jpg",
+      "row_index": 2,
+      "raw_text": "KWNL COMMIEWACKER",
+      "left_text": "KWNL",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9071
+    },
+    {
+      "timestamp_seconds": 97.0,
+      "frame": "frame_000097.jpg",
+      "row_index": 1,
+      "raw_text": "FOPDOODLE SLUDGEGUY",
+      "left_text": "FOPDOODLE",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9919
+    },
+    {
+      "timestamp_seconds": 97.0,
+      "frame": "frame_000097.jpg",
+      "row_index": 2,
+      "raw_text": "KWNI COMMIEWACKER",
+      "left_text": "KWNI",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9583
+    },
+    {
+      "timestamp_seconds": 98.0,
+      "frame": "frame_000098.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL SLUDGEGUY",
+      "left_text": "KWNL",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.958
+    },
+    {
+      "timestamp_seconds": 98.0,
+      "frame": "frame_000098.jpg",
+      "row_index": 2,
+      "raw_text": "FOPDOODLE SLUDGEGUY",
+      "left_text": "FOPDOODLE",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9979
+    },
+    {
+      "timestamp_seconds": 98.0,
+      "frame": "frame_000098.jpg",
+      "row_index": 3,
+      "raw_text": "KWNL COMMIEWACKER",
+      "left_text": "KWNL",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.997
+    },
+    {
+      "timestamp_seconds": 99.0,
+      "frame": "frame_000099.jpg",
+      "row_index": 1,
+      "raw_text": "IKWNL SLUDGEGUY",
+      "left_text": "IKWNL",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.6579
+    },
+    {
+      "timestamp_seconds": 99.0,
+      "frame": "frame_000099.jpg",
+      "row_index": 2,
+      "raw_text": "FOPDOODLE SLUDGEGUY",
+      "left_text": "FOPDOODLE",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9964
+    },
+    {
+      "timestamp_seconds": 99.0,
+      "frame": "frame_000099.jpg",
+      "row_index": 3,
+      "raw_text": "KWNL COMMIEWACKER",
+      "left_text": "KWNL",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9989
+    },
+    {
+      "timestamp_seconds": 100.0,
+      "frame": "frame_000100.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL SLUDGEGUY",
+      "left_text": "KWNL",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.995
+    },
+    {
+      "timestamp_seconds": 100.0,
+      "frame": "frame_000100.jpg",
+      "row_index": 2,
+      "raw_text": "FOPDOODLE SLUDGEGUY",
+      "left_text": "FOPDOODLE",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9958
+    },
+    {
+      "timestamp_seconds": 101.0,
+      "frame": "frame_000101.jpg",
+      "row_index": 1,
+      "raw_text": "IKWNL SLUDGEGUY",
+      "left_text": "IKWNL",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9921
+    },
+    {
+      "timestamp_seconds": 101.0,
+      "frame": "frame_000101.jpg",
+      "row_index": 2,
+      "raw_text": "FOPDOODLE SLUDGEGUY",
+      "left_text": "FOPDOODLE",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9975
+    },
+    {
+      "timestamp_seconds": 102.0,
+      "frame": "frame_000102.jpg",
+      "row_index": 1,
+      "raw_text": "KWINL SLUDGEGUY",
+      "left_text": "KWINL",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9864
+    },
+    {
+      "timestamp_seconds": 102.0,
+      "frame": "frame_000102.jpg",
+      "row_index": 2,
+      "raw_text": "FOPDQODLE SLUDGEGUY",
+      "left_text": "FOPDQODLE",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9943
+    },
+    {
+      "timestamp_seconds": 103.0,
+      "frame": "frame_000103.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL SLUDGEGUY",
+      "left_text": "KWNL",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.991
+    },
+    {
+      "timestamp_seconds": 104.0,
+      "frame": "frame_000104.jpg",
+      "row_index": 1,
+      "raw_text": "IKWNL SLUDGEGUY",
+      "left_text": "IKWNL",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9846
+    },
+    {
+      "timestamp_seconds": 105.0,
+      "frame": "frame_000105.jpg",
+      "row_index": 1,
+      "raw_text": "IKWNL SLUDGEGUY",
+      "left_text": "IKWNL",
+      "right_text": "SLUDGEGUY",
+      "ocr_confidence": 0.9923
+    },
+    {
+      "timestamp_seconds": 107.0,
+      "frame": "frame_000107.jpg",
+      "row_index": 1,
+      "raw_text": "KWNI COMMIEWACKER",
+      "left_text": "KWNI",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.946
+    },
+    {
+      "timestamp_seconds": 108.0,
+      "frame": "frame_000108.jpg",
+      "row_index": 1,
+      "raw_text": "KWNL COMMIEWACKFR",
+      "left_text": "KWNL",
+      "right_text": "COMMIEWACKFR",
+      "ocr_confidence": 0.9204
+    },
+    {
+      "timestamp_seconds": 109.0,
+      "frame": "frame_000109.jpg",
+      "row_index": 1,
+      "raw_text": "GOODGuti cOWBOY",
+      "left_text": "GOODGuti",
+      "right_text": "cOWBOY",
+      "ocr_confidence": 0.5567
+    },
+    {
+      "timestamp_seconds": 109.0,
+      "frame": "frame_000109.jpg",
+      "row_index": 2,
+      "raw_text": "KWNL COMMIEWACKER",
+      "left_text": "KWNL",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9711
+    },
+    {
+      "timestamp_seconds": 110.0,
+      "frame": "frame_000110.jpg",
+      "row_index": 1,
+      "raw_text": "GOODGUY COWBOY",
+      "left_text": "GOODGUY",
+      "right_text": "COWBOY",
+      "ocr_confidence": 0.9842
+    },
+    {
+      "timestamp_seconds": 110.0,
+      "frame": "frame_000110.jpg",
+      "row_index": 2,
+      "raw_text": "KWNL COMMIEWACKER",
+      "left_text": "KWNL",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.5811
+    },
+    {
+      "timestamp_seconds": 111.0,
+      "frame": "frame_000111.jpg",
+      "row_index": 1,
+      "raw_text": "SUSSYSCYLA POKIPSY",
+      "left_text": "SUSSYSCYLA",
+      "right_text": "POKIPSY",
+      "ocr_confidence": 0.9782
+    },
+    {
+      "timestamp_seconds": 111.0,
+      "frame": "frame_000111.jpg",
+      "row_index": 2,
+      "raw_text": "'GOODCI COWBOY",
+      "left_text": "'GOODCI",
+      "right_text": "COWBOY",
+      "ocr_confidence": 0.9697
+    },
+    {
+      "timestamp_seconds": 111.0,
+      "frame": "frame_000111.jpg",
+      "row_index": 3,
+      "raw_text": "KWNL COMMIEWACKER",
+      "left_text": "KWNL",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.7318
+    },
+    {
+      "timestamp_seconds": 112.0,
+      "frame": "frame_000112.jpg",
+      "row_index": 1,
+      "raw_text": "'SUSSYSCYLA POKIPSY",
+      "left_text": "'SUSSYSCYLA",
+      "right_text": "POKIPSY",
+      "ocr_confidence": 0.8252
+    },
+    {
+      "timestamp_seconds": 112.0,
+      "frame": "frame_000112.jpg",
+      "row_index": 2,
+      "raw_text": "IGOODGuy COWBOY",
+      "left_text": "IGOODGuy",
+      "right_text": "COWBOY",
+      "ocr_confidence": 0.9909
+    },
+    {
+      "timestamp_seconds": 112.0,
+      "frame": "frame_000112.jpg",
+      "row_index": 3,
+      "raw_text": "KWNL COMMIEWACKER",
+      "left_text": "KWNL",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9788
+    },
+    {
+      "timestamp_seconds": 113.0,
+      "frame": "frame_000113.jpg",
+      "row_index": 1,
+      "raw_text": "'SUSSYSCYUA POKIPSY",
+      "left_text": "'SUSSYSCYUA",
+      "right_text": "POKIPSY",
+      "ocr_confidence": 0.9594
+    },
+    {
+      "timestamp_seconds": 113.0,
+      "frame": "frame_000113.jpg",
+      "row_index": 2,
+      "raw_text": "GOODGUY COWBOY",
+      "left_text": "GOODGUY",
+      "right_text": "COWBOY",
+      "ocr_confidence": 0.9819
+    },
+    {
+      "timestamp_seconds": 113.0,
+      "frame": "frame_000113.jpg",
+      "row_index": 3,
+      "raw_text": "KWNL COMMIEWACKER",
+      "left_text": "KWNL",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9891
+    },
+    {
+      "timestamp_seconds": 114.0,
+      "frame": "frame_000114.jpg",
+      "row_index": 1,
+      "raw_text": "'SUSSYSCYULA POKIPSY",
+      "left_text": "'SUSSYSCYULA",
+      "right_text": "POKIPSY",
+      "ocr_confidence": 0.8906
+    },
+    {
+      "timestamp_seconds": 114.0,
+      "frame": "frame_000114.jpg",
+      "row_index": 2,
+      "raw_text": "GOODGUY COWBOY",
+      "left_text": "GOODGUY",
+      "right_text": "COWBOY",
+      "ocr_confidence": 0.9892
+    },
+    {
+      "timestamp_seconds": 114.0,
+      "frame": "frame_000114.jpg",
+      "row_index": 3,
+      "raw_text": "KWNNL COMMIEWACKER",
+      "left_text": "KWNNL",
+      "right_text": "COMMIEWACKER",
+      "ocr_confidence": 0.9967
+    },
+    {
+      "timestamp_seconds": 115.0,
+      "frame": "frame_000115.jpg",
+      "row_index": 1,
+      "raw_text": "\"SUSSYSCYUA POKIPSY",
+      "left_text": "\"SUSSYSCYUA",
+      "right_text": "POKIPSY",
+      "ocr_confidence": 0.9075
+    },
+    {
+      "timestamp_seconds": 115.0,
+      "frame": "frame_000115.jpg",
+      "row_index": 2,
+      "raw_text": "GOODGuY COWBOY",
+      "left_text": "GOODGuY",
+      "right_text": "COWBOY",
+      "ocr_confidence": 0.9689
+    },
+    {
+      "timestamp_seconds": 116.0,
+      "frame": "frame_000116.jpg",
+      "row_index": 1,
+      "raw_text": "FERGUS KWNU",
+      "left_text": "FERGUS",
+      "right_text": "KWNU",
+      "ocr_confidence": 0.8356
+    },
+    {
+      "timestamp_seconds": 116.0,
+      "frame": "frame_000116.jpg",
+      "row_index": 2,
+      "raw_text": "SUSSYSCYLLA POKIPSY",
+      "left_text": "SUSSYSCYLLA",
+      "right_text": "POKIPSY",
+      "ocr_confidence": 0.9607
+    },
+    {
+      "timestamp_seconds": 117.0,
+      "frame": "frame_000117.jpg",
+      "row_index": 1,
+      "raw_text": "FERGUS KWNL",
+      "left_text": "FERGUS",
+      "right_text": "KWNL",
+      "ocr_confidence": 0.9005
+    },
+    {
+      "timestamp_seconds": 117.0,
+      "frame": "frame_000117.jpg",
+      "row_index": 2,
+      "raw_text": "'SUSSYSCYLLA POKIPSY",
+      "left_text": "'SUSSYSCYLLA",
+      "right_text": "POKIPSY",
+      "ocr_confidence": 0.9311
+    },
+    {
+      "timestamp_seconds": 118.0,
+      "frame": "frame_000118.jpg",
+      "row_index": 1,
+      "raw_text": "HYBRID | KING'S ROW TIME: 1.51",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.8224
+    },
+    {
+      "timestamp_seconds": 118.0,
+      "frame": "frame_000118.jpg",
+      "row_index": 2,
+      "raw_text": "MATCH RANK RANGE:",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.7479
+    },
+    {
+      "timestamp_seconds": 119.0,
+      "frame": "frame_000119.jpg",
+      "row_index": 1,
+      "raw_text": "HYBRID | KING'S ROW TIME: 1.52",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.9277
+    },
+    {
+      "timestamp_seconds": 119.0,
+      "frame": "frame_000119.jpg",
+      "row_index": 2,
+      "raw_text": "MATCH RANK RANGE:",
+      "left_text": "",
+      "right_text": "",
+      "ocr_confidence": 0.8527
+    },
+    {
+      "timestamp_seconds": 120.0,
+      "frame": "frame_000120.jpg",
+      "row_index": 1,
+      "raw_text": "PREV RESPAWN IN 6",
+      "left_text": "PREV",
+      "right_text": "RESPAWN IN 6",
+      "ocr_confidence": 0.9928
+    },
+    {
+      "timestamp_seconds": 120.0,
+      "frame": "frame_000120.jpg",
+      "row_index": 2,
+      "raw_text": "FERGUS KWNL",
+      "left_text": "FERGUS",
+      "right_text": "KWNL",
+      "ocr_confidence": 0.9982
+    }
+  ],
+  "settings": {
+    "fuzzyMatchThreshold": 78,
+    "dedupeWindowSeconds": 2.0,
+    "mergeWindowSeconds": 8.0,
+    "clipPreSeconds": 15.0,
+    "clipPostSeconds": 0.0
+  }
+}

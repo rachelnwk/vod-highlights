@@ -1,13 +1,20 @@
-import mysql.connector
-from config import settings
+import pymysql
+from pymysql.cursors import DictCursor
 
+from config.reader import CONFIG, require_value
 
+DB_HOST = require_value("rds", "endpoint")
+DB_PORT = CONFIG.getint("rds", "port_number")
+DB_USER = require_value("rds", "user_name")
+DB_PASSWORD = require_value("rds", "user_pwd")
+DB_NAME = require_value("rds", "db_name")
 def get_connection():
-    return mysql.connector.connect(
-        host=settings.DB_HOST,
-        port=settings.DB_PORT,
-        user=settings.DB_USER,
-        password=settings.DB_PASSWORD,
-        database=settings.DB_NAME,
+    return pymysql.connect(
+        host=DB_HOST,
+        port=DB_PORT,
+        user=DB_USER,
+        password=DB_PASSWORD,
+        database=DB_NAME,
+        cursorclass=DictCursor,
         autocommit=False,
     )

@@ -1,19 +1,11 @@
 import json
-import sys
-from pathlib import Path
 from urllib import error, request
 
-from config import settings
+from config.reader import CONFIG, require_value
 
-
-def _load_local_lambda_result(payload: dict) -> dict:
-    repo_root = Path(__file__).resolve().parents[1]
-    if str(repo_root) not in sys.path:
-        sys.path.insert(0, str(repo_root))
-
-    from lambda_functions.highlight_analysis import analyze_highlight_request
-
-    return analyze_highlight_request(payload)
+ANALYSIS_API_BASE_URL = require_value("analysis_api", "base_url").rstrip("/")
+ANALYSIS_API_PATH = require_value("analysis_api", "path")
+ANALYSIS_REQUEST_TIMEOUT_SECONDS = CONFIG.getint("analysis_api", "timeout_seconds")
 
 
 def _parse_response_body(raw_body: bytes) -> dict:
@@ -38,10 +30,7 @@ def _parse_response_body(raw_body: bytes) -> dict:
 
 
 def analyze_observations(payload: dict) -> dict:
-    if not settings.ANALYSIS_API_BASE_URL:
-        return _load_local_lambda_result(payload)
-
-    url = f"{settings.ANALYSIS_API_BASE_URL.rstrip('/')}{settings.ANALYSIS_API_PATH}"
+    url = f"{ANALYSIS_API_BASE_URL}{ANALYSIS_API_PATH}"
     body = json.dumps(payload).encode("utf-8")
     req = request.Request(
         url,
@@ -51,7 +40,7 @@ def analyze_observations(payload: dict) -> dict:
     )
 
     try:
-        with request.urlopen(req, timeout=settings.ANALYSIS_REQUEST_TIMEOUT_SECONDS) as response:
+        with request.urlopen(req, timeout=ANALYSIS_REQUEST_TIMEOUT_SECONDS) as response:
             return _parse_response_body(response.read())
     except error.HTTPError as exc:
         try:
