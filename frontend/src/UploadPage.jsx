@@ -23,9 +23,7 @@ export default function UploadPage() {
   const [discardingClipId, setDiscardingClipId] = useState('');
   const hasActiveVideo = videos.some((video) => video.status === 'queued' || video.status === 'processing');
 
-  // Purpose: Refresh the saved video library from the worker and sync selected clips.
-  // Input: showLoading (boolean) to control whether the loading state is shown.
-  // Output: Promise that resolves after state is updated.
+  // Refresh the saved video library from the worker and sync selected clips
   async function refreshVideos(showLoading = false) {
     if (showLoading) {
       setVideosLoading(true);
@@ -67,7 +65,7 @@ export default function UploadPage() {
     return () => clearInterval(timer);
   }, [videos]);
 
-  // Purpose: Add or remove a clip ID from the current cross-video selection.
+  // Add or remove a clip ID from the current cross-video selection.
   // Input: clipId (string) and checked (boolean) from the selection checkbox.
   // Output: None; updates component state.
   function updateClipSelection(clipId, checked) {
@@ -83,7 +81,7 @@ export default function UploadPage() {
     });
   }
 
-  // Purpose: Delete one saved clip after confirmation and refresh the library.
+  //  Delete one saved clip after confirmation and refresh the library.
   // Input: videoId (string) and clipId (string) identifying the clip to discard.
   // Output: Promise that resolves after the delete flow finishes.
   async function handleDiscardClip(videoId, clipId) {
@@ -103,7 +101,7 @@ export default function UploadPage() {
     }
   }
 
-  // Purpose: Request a merged download for the currently selected clips.
+  // Request a merged download for the currently selected clips.
   // Input: No direct arguments; uses selectedClipIds from state.
   // Output: Promise that resolves after the download request completes.
   async function handleMergeSelected() {
@@ -121,7 +119,7 @@ export default function UploadPage() {
     }
   }
 
-  // Purpose: Delete every saved video and its clips after user confirmation.
+  // Delete every saved video and its clips after user confirmation.
   // Input: No direct arguments; uses savedVideos from state.
   // Output: Promise that resolves after the library is cleared.
   async function handleDeleteAllVideos() {
@@ -148,7 +146,7 @@ export default function UploadPage() {
     }
   }
 
-  // Purpose: Validate the form, upload the video, and start a new processing job.
+  // Validate the form, upload the video, and start a new processing job.
   // Input: event (SubmitEvent) from the upload form.
   // Output: Promise that resolves after the job is created and local state is updated.
   async function handleSubmit(event) {

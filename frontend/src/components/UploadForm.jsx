@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Purpose: Render the upload form and progress UI for creating a new job.
+// Render the upload form and progress UI for creating a new job.
 // Input: Props with form values, callbacks, loading state, and upload status.
 // Output: JSX for the upload form card.
 export default function UploadForm({

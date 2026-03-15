@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Purpose: Display status, progress, and clip count details for one job.
+// Display status, progress, and clip count details for one job.
 // Input: Props with a job object from the worker API.
 // Output: JSX for the job status panel.
 export default function JobStatus({ job }) {
