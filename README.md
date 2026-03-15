@@ -6,7 +6,7 @@ This project has 3 parts:
 - `worker/`: local Python service that processes videos
 - `lambda/`: AWS Lambda highlight analysis code
 
-## Prerequisites
+## Requirements
 
 - Python 3
 - Node.js + npm
@@ -64,7 +64,7 @@ local_helper=http://localhost:4001
 ```bash
 cd worker
 python -m venv .venv
-.venv\Scripts\activate
+.venv\Scripts\activate or source .venv/bin/activate (on macOS)
 pip install -r requirements.txt
 python worker.py
 ```
@@ -106,9 +106,3 @@ Useful values to adjust:
 - `fuzzy_match_threshold`: player-name match strictness
 - `max_concurrent_jobs`: how many videos can process at once
 - `temp_dir`: local working directory for worker artifacts
-
-## Files To Edit Most Often
-
-- `worker/worker-config.ini`
-- `frontend/client-config.ini`
-- `lambda/lambda_console.py`
