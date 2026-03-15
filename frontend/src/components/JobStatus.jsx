@@ -1,5 +1,8 @@
 import React from 'react';
 
+// Display status, progress, and clip count details for one job.
+// Input: Props with a job object from the worker API.
+// Output: JSX for the job status panel.
 export default function JobStatus({ job }) {
   const tone =
     job.status === 'completed'

@@ -7,7 +7,6 @@ AWS_S3_URL_EXPIRATION_SECONDS = CONFIG.getint("s3", "url_expiration_seconds", fa
 
 s3_client = boto3.client("s3", region_name=AWS_REGION)
 
-
 def build_s3_object_url(
     bucket: str,
     key: str,

@@ -1,5 +1,8 @@
 import clientIniText from '../client-config.ini?raw';
 
+// Parse the frontend INI config into a flat key/value object.
+// Input: content (string) containing raw INI text.
+// Output: Object with parsed config values.
 function parseIni(content) {
   const values = {};
   let currentSection = null;
@@ -33,18 +36,14 @@ function parseIni(content) {
 }
 
 const config = parseIni(clientIniText);
-const LOCAL_HELPER_BASE =
-  config.VITE_LOCAL_HELPER_BASE_URL ||
-  config.LOCAL_HELPER_BASE_URL ||
-  config['client.local_helper'] ||
-  config['client.webservice'] ||
-  'http://localhost:4001';
+const LOCAL_HELPER_BASE = config['client.local_helper'];
 
 const RETRY_ATTEMPTS = 3;
 const RETRY_BASE_DELAY_MS = 500;
 const REQUEST_TIMEOUT_MS = 10000;
 const MERGE_REQUEST_TIMEOUT_MS = 120000;
 
+// Helpers
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -75,6 +74,9 @@ async function handleResponse(response) {
   return response.json();
 }
 
+// Send a request to the worker with timeout and retry logic.
+// Input: path (string), options (object), and operation (string) for error labeling.
+// Output: Promise resolving to parsed JSON from the worker.
 async function requestWithRetry(path, options = {}, operation = 'request') {
   let lastError;
   const url = `${LOCAL_HELPER_BASE}${path}`;
@@ -119,6 +121,10 @@ async function requestWithRetry(path, options = {}, operation = 'request') {
   throw new Error(`Request failed for ${operation}`);
 }
 
+
+// Upload a local video to the worker and create a new processing job.
+// Input: file (File), playerName (string), and onProgress (function | undefined).
+// Output: Promise resolving to the created job payload.
 export function startLocalJob(file, playerName, onProgress) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -166,10 +172,16 @@ export function startLocalJob(file, playerName, onProgress) {
   });
 }
 
+// Fetch the saved video library from the worker.
+// Input: No arguments.
+// Output: Promise resolving to the worker's video payload.
 export async function listVideos() {
   return requestWithRetry('/videos', {}, 'listVideos');
 }
 
+// Discard one saved clip from a specific video.
+// Input: videoId (string) and clipId (string).
+// Output: Promise resolving to the worker's delete response.
 export async function discardClip(videoId, clipId) {
   return requestWithRetry(
     `/videos/${videoId}/clips/${clipId}`,
@@ -178,6 +190,9 @@ export async function discardClip(videoId, clipId) {
   );
 }
 
+// Delete all saved videos and clips from the worker-backed library.
+// Input: No arguments.
+// Output: Promise resolving to the worker's bulk-delete response.
 export async function deleteAllVideos() {
   return requestWithRetry(
     '/videos',
@@ -186,6 +201,9 @@ export async function deleteAllVideos() {
   );
 }
 
+// Request one merged download for a list of selected clip IDs.
+// Input: clipIds (string[]) in the desired merge order.
+// Output: Promise that resolves after the browser download is triggered.
 export async function downloadMergedClips(clipIds) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), MERGE_REQUEST_TIMEOUT_MS);
@@ -229,8 +247,4 @@ export async function downloadMergedClips(clipIds) {
   } finally {
     clearTimeout(timeout);
   }
-}
-
-export function getConfiguredLocalHelper() {
-  return LOCAL_HELPER_BASE;
 }

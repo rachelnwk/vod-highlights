@@ -1,11 +1,14 @@
 import json
 from difflib import SequenceMatcher
 
+## Helpers for text normalization, fuzzy matching, and event classification in the highlight analysis pipeline.
 
+# Normalize text for matching by lowercasing and stripping non-alphanumerics.
 def normalize_text(value: str) -> str:
     return "".join(ch for ch in value.lower().strip() if ch.isalnum())
 
 
+# Compute a lightweight partial-ratio score between two strings for fuzzy matching
 def _partial_ratio(a: str, b: str) -> float:
     if not a or not b:
         return 0.0
@@ -26,6 +29,7 @@ def _partial_ratio(a: str, b: str) -> float:
     return best
 
 
+# Check for a username match
 def is_player_match(ocr_text: str, player_name: str, threshold: int) -> tuple[bool, float]:
     norm_text = normalize_text(ocr_text)
     norm_player = normalize_text(player_name)
@@ -43,13 +47,13 @@ def is_player_match(ocr_text: str, player_name: str, threshold: int) -> tuple[bo
 def _clean_text(value) -> str:
     return str(value or "").strip()
 
-
 def _combine_confidence(match_confidence: float, ocr_confidence: float) -> float:
     if ocr_confidence > 0:
         return round((match_confidence + ocr_confidence) / 2, 4)
     return round(match_confidence, 4)
 
 
+# Classify one OCR observation as a player kill, death, ambiguous event, or unclassified match.
 def classify_player_event(observation: dict, player_name: str, threshold: int) -> dict | None:
     raw_text = _clean_text(observation.get("raw_text"))
     left_text = _clean_text(observation.get("left_text"))
@@ -117,6 +121,9 @@ def classify_player_event(observation: dict, player_name: str, threshold: int) -
     }
 
 
+# Run player-event classification across all OCR observations.
+# Input: observations (list[dict]), player_name (str), and threshold (int).
+# Output: List of matched event dicts.
 def select_matching_events(observations: list[dict], player_name: str, threshold: int) -> list[dict]:
     matched_events: list[dict] = []
 
@@ -128,6 +135,9 @@ def select_matching_events(observations: list[dict], player_name: str, threshold
     return matched_events
 
 
+# Combine nearby repeated detections
+# Input: raw_events (list[dict]) and dedupe_window_seconds (float).
+# Output: List of deduped event dicts.
 def dedupe_nearby_events(raw_events: list[dict], dedupe_window_seconds: float) -> list[dict]:
     if not raw_events:
         return []
@@ -148,6 +158,9 @@ def dedupe_nearby_events(raw_events: list[dict], dedupe_window_seconds: float) -
     return deduped
 
 
+# Merge nearby events into highlight groups that should become clips.
+# Input: events (list[dict]) and merge_window_seconds (float).
+# Output: List of highlight-group dicts.
 def merge_events_into_highlights(events: list[dict], merge_window_seconds: float) -> list[dict]:
     if not events:
         return []
@@ -181,6 +194,9 @@ def merge_events_into_highlights(events: list[dict], merge_window_seconds: float
     return highlights
 
 
+# Convert highlight groups into final clip windows and merge overlapping windows.
+# Input: highlights (list[dict]), clip_pre_seconds (float), and clip_post_seconds (float).
+# Output: List of clip-window dicts.
 def build_clip_windows(highlights: list[dict], clip_pre_seconds: float, clip_post_seconds: float) -> list[dict]:
     if not highlights:
         return []
@@ -212,6 +228,9 @@ def build_clip_windows(highlights: list[dict], clip_pre_seconds: float, clip_pos
     return merged
 
 
+# Run the full highlight-analysis pipeline on one request payload.
+# Input: payload (dict) containing playerName, observations, and settings.
+# Output: Dict with matched events, highlight groups, clip windows, and summary counts.
 def analyze_highlight_request(payload: dict) -> dict:
     if not isinstance(payload, dict):
         raise ValueError("Request body must be a JSON object.")
@@ -268,6 +287,7 @@ def analyze_highlight_request(payload: dict) -> dict:
     }
 
 
+# Format a new Lambda/API Gateway HTTP response.
 def _response(status_code: int, body: dict) -> dict:
     return {
         "statusCode": status_code,
@@ -281,6 +301,9 @@ def _response(status_code: int, body: dict) -> dict:
     }
 
 
+# Purpose: Handle Lambda invocations, parse the incoming request, and return analysis results.
+# Input: event from Lambda/API Gateway and context from Lambda runtime.
+# Output: API Gateway proxy response dict with success or error payload.
 def lambda_handler(event, context):
     try:
         print("**Call to highlight analysis")

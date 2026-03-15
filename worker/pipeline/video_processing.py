@@ -9,6 +9,9 @@ from utils.ffmpeg_utils import run_ffmpeg
 AWS_S3_BUCKET = require_value("s3", "bucket_name")
 
 
+# Extract sampled video frames at the configured rate into a directory.
+# Input: video_path (Path), frames_dir (Path), and sample_fps (float).
+# Output: Path to the directory containing the sampled frames.
 def extract_sampled_frames(video_path: Path, frames_dir: Path, sample_fps: float) -> Path:
     frames_dir.mkdir(parents=True, exist_ok=True)
     output_pattern = frames_dir / "frame_%06d.jpg"
@@ -26,6 +29,9 @@ def extract_sampled_frames(video_path: Path, frames_dir: Path, sample_fps: float
     return frames_dir
 
 
+# Crop the kill-feed region from every sampled frame image.
+# Input: frames_dir (Path), crops_dir (Path), and crop rectangle coordinates/sizes.
+# Output: Path to the directory containing the crop images.
 def crop_killfeed_region(
     frames_dir: Path,
     crops_dir: Path,
@@ -45,28 +51,16 @@ def crop_killfeed_region(
     return crops_dir
 
 
+# Cut one finalized clip window out of the source video.
+# Input: video_path (Path), window (dict), and output_path (Path).
+# Output: Dict describing the created local clip.
 def _cut_clip(video_path: Path, window: dict, output_path: Path) -> dict:
     duration = max(0.1, float(window["end_time"]) - float(window["start_time"]))
 
-    command = [
-        "ffmpeg",
-        "-y",
-        "-ss",
-        str(window["start_time"]),
-        "-i",
-        str(video_path),
-        "-t",
-        str(round(duration, 3)),
-        "-c:v",
-        "libx264",
-        "-preset",
-        "veryfast",
-        "-crf",
-        "23",
-        "-c:a",
-        "aac",
-        str(output_path),
-    ]
+    command = ["ffmpeg", "-y", "-ss", str(window["start_time"]),
+        "-i", str(video_path), "-t", str(round(duration, 3)),
+        "-c:v", "libx264", "-preset", "veryfast",
+        "-crf", "23", "-c:a", "aac", str(output_path),]
     run_ffmpeg(command)
 
     return {
@@ -78,6 +72,9 @@ def _cut_clip(video_path: Path, window: dict, output_path: Path) -> dict:
     }
 
 
+# Cut every planned highlight window into standalone clip files.
+# Input: video_path (Path), clip_windows (list[dict]), and output_dir (Path).
+# Output: List of local clip metadata dicts.
 def cut_planned_clips(video_path: Path, clip_windows: list[dict], output_dir: Path) -> list[dict]:
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -89,25 +86,16 @@ def cut_planned_clips(video_path: Path, clip_windows: list[dict], output_dir: Pa
     return clips
 
 
+# Generate one thumbnail image for each local clip (just the first second)
 def generate_clip_thumbnails(clips: list[dict], thumbnails_dir: Path) -> list[dict]:
     thumbnails_dir.mkdir(parents=True, exist_ok=True)
 
     for clip in clips:
         clip_path = Path(clip["local_path"])
         thumb_path = thumbnails_dir / f"{clip_path.stem}.jpg"
-
-        # Extract first-second thumbnail for quick UI preview.
-        command = [
-            "ffmpeg",
-            "-y",
-            "-i",
-            str(clip_path),
-            "-ss",
-            "00:00:01",
-            "-vframes",
-            "1",
-            str(thumb_path),
-        ]
+        command = ["ffmpeg", "-y", "-i", str(clip_path),
+            "-ss", "00:00:01", "-vframes", "1", str(thumb_path),]
+        
         run_ffmpeg(command)
 
         clip["thumbnail_local_path"] = thumb_path
@@ -115,11 +103,15 @@ def generate_clip_thumbnails(clips: list[dict], thumbnails_dir: Path) -> list[di
     return clips
 
 
+# Helper to format one clip path as an FFmpeg concat manifest line.
 def _concat_manifest_line(path: Path) -> str:
     escaped = path.resolve().as_posix().replace("'", "'\\''")
     return f"file '{escaped}'"
 
 
+# Merge multiple local clips into one output video file.
+# Input: clip_paths (list[Path]) and output_path (Path) for the merged file.
+# Output: Path to the merged video file.
 def merge_local_clips(clip_paths: list[Path], output_path: Path) -> Path:
     if not clip_paths:
         raise ValueError("At least one clip is required to merge.")
@@ -131,43 +123,17 @@ def merge_local_clips(clip_paths: list[Path], output_path: Path) -> Path:
         encoding="utf-8",
     )
 
-    copy_command = [
-        "ffmpeg",
-        "-y",
-        "-f",
-        "concat",
-        "-safe",
-        "0",
-        "-i",
-        str(manifest_path),
-        "-c",
-        "copy",
-        str(output_path),
-    ]
+    copy_command = ["ffmpeg", "-y", "-f", "concat", "-safe",
+        "0", "-i", str(manifest_path), "-c", "copy", str(output_path),]
 
     try:
         run_ffmpeg(copy_command)
     except RuntimeError:
         # Fall back to re-encoding if stream-copy concat fails for any clip combination.
-        reencode_command = [
-            "ffmpeg",
-            "-y",
-            "-f",
-            "concat",
-            "-safe",
-            "0",
-            "-i",
-            str(manifest_path),
-            "-c:v",
-            "libx264",
-            "-preset",
-            "veryfast",
-            "-crf",
-            "23",
-            "-c:a",
-            "aac",
-            str(output_path),
-        ]
+        reencode_command = ["ffmpeg", "-y", "-f", "concat", "-safe",
+            "0", "-i", str(manifest_path), "-c:v", "libx264", "-preset",
+            "veryfast", "-crf", "23", "-c:a", "aac", str(output_path),]
+        
         run_ffmpeg(reencode_command)
 
     return output_path

@@ -8,6 +8,11 @@ ANALYSIS_API_PATH = require_value("analysis_api", "path")
 ANALYSIS_REQUEST_TIMEOUT_SECONDS = CONFIG.getint("analysis_api", "timeout_seconds")
 
 
+# analysis_client.py: Client for sending OCR observations to the analysis API and parsing responses.
+
+# Parse the Lambda/API response body into a plain dict and unwrap proxy responses.
+# Input: raw_body (bytes) returned by urllib from the analysis API.
+# Output: Dict containing the parsed response payload.
 def _parse_response_body(raw_body: bytes) -> dict:
     if not raw_body:
         return {}
@@ -29,6 +34,9 @@ def _parse_response_body(raw_body: bytes) -> dict:
     return parsed
 
 
+# Send OCR observations to the configured analysis API and return the parsed result.
+# Input: payload (dict) containing player name, observations, and analysis settings.
+# Output: Dict containing the analysis response from Lambda/API Gateway.
 def analyze_observations(payload: dict) -> dict:
     url = f"{ANALYSIS_API_BASE_URL}{ANALYSIS_API_PATH}"
     body = json.dumps(payload).encode("utf-8")

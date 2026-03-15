@@ -3,13 +3,12 @@ from pathlib import Path
 
 _reader = None
 
-
+## Helper functions for timestamps
 def frame_filename_to_index(frame_path: str) -> int:
     match = re.search(r"(\d+)", Path(frame_path).stem)
     if not match:
         raise ValueError(f"Could not parse frame index from {frame_path}")
     return int(match.group(1))
-
 
 def frame_index_to_seconds(frame_index: int, sample_fps: float) -> float:
     if sample_fps <= 0:
@@ -17,18 +16,19 @@ def frame_index_to_seconds(frame_index: int, sample_fps: float) -> float:
     return frame_index / sample_fps
 
 
+## lazily create and cache the EasyOCR reader
 def _get_reader():
     global _reader
-
     if _reader is None:
         import easyocr
-
-        # Lazy-load OCR so the worker can start without loading the model until a job actually needs it.
+        # Lazy-load
         _reader = easyocr.Reader(["en"], gpu=False)
-
     return _reader
 
 
+# Convert one EasyOCR entry into a normalized text fragment record.
+# Input: entry (list) from EasyOCR containing bbox, text, and confidence.
+# Output: Fragment dict or None if the OCR entry is unusable.
 def _build_fragment(entry: list) -> dict | None:
     if len(entry) < 2:
         return None
@@ -62,7 +62,9 @@ def _build_fragment(entry: list) -> dict | None:
         "height": max(1.0, y_max - y_min),
     }
 
-
+#
+# Functions to help determine kills. Separate by row and by left/right side
+#
 def _group_fragments_into_rows(fragments: list[dict]) -> list[list[dict]]:
     if not fragments:
         return []
@@ -91,7 +93,6 @@ def _group_fragments_into_rows(fragments: list[dict]) -> list[list[dict]]:
         for row in rows
     ]
 
-
 def _split_row_text(row_fragments: list[dict]) -> tuple[str, str]:
     if len(row_fragments) < 2:
         return "", ""
@@ -113,6 +114,9 @@ def _split_row_text(row_fragments: list[dict]) -> tuple[str, str]:
     return left_text, right_text
 
 
+# Run OCR across all crop images and return normalized observation records.
+# Input: crops_dir (Path) containing crop images and sample_fps (float).
+# Output: List of observation dicts for highlight analysis.
 def extract_ocr_observations(crops_dir: Path, sample_fps: float) -> list[dict]:
     observations: list[dict] = []
     reader = _get_reader()

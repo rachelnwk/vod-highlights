@@ -1,10 +1,5 @@
 # Highlight Analysis Lambda
 
-This folder contains the Python code intended for the AWS Lambda portion of the
-project.
-
-## What It Does
-
 The Lambda receives compact OCR JSON from the local helper, then performs the
 server-side highlight logic:
 
@@ -15,23 +10,19 @@ server-side highlight logic:
 - merge detections into highlight groups
 - compute final clip windows and scores
 
-## Files
-
-- `lambda_console.py`: canonical single-file Lambda implementation
-- `README.md`: notes for the inline Lambda setup
 
 ## Expected Request Shape
 
 ```json
 {
-  "playerName": "RachelLi",
+  "playerName": "Player",
   "observations": [
     {
       "timestamp_seconds": 12.5,
       "frame": "frame_000025.jpg",
       "row_index": 1,
-      "raw_text": "RachelLi eliminated Opponent",
-      "left_text": "RachelLi",
+      "raw_text": "Player eliminated Opponent",
+      "left_text": "Player",
       "right_text": "Opponent",
       "ocr_confidence": 0.92
     }
@@ -45,9 +36,3 @@ server-side highlight logic:
   }
 }
 ```
-
-## Local Smoke Test
-
-The worker now expects `analysis_api.base_url` to point at your deployed API
-Gateway endpoint. This file is the Lambda implementation that API Gateway
-invokes.
