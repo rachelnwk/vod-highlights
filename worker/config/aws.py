@@ -7,10 +7,6 @@ AWS_S3_URL_EXPIRATION_SECONDS = CONFIG.getint("s3", "url_expiration_seconds", fa
 
 s3_client = boto3.client("s3", region_name=AWS_REGION)
 
-
-# Purpose: Build a presigned S3 URL for viewing or downloading an object.
-# Input: bucket (str), key (str), and optional response_content_disposition (str | None).
-# Output: String containing a temporary signed URL for the object.
 def build_s3_object_url(
     bucket: str,
     key: str,

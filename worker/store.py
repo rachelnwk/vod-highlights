@@ -12,7 +12,7 @@ _SCHEMA_LOCK = threading.Lock()
 _SCHEMA_READY = False
 
 
-# Purpose: Decode the stored summary JSON field into a Python object when present.
+# Decode the stored summary JSON field into a Python object when present.
 # Input: value from the database, usually None, dict, or JSON string.
 # Output: Parsed summary dict or None.
 def _parse_summary(value):
@@ -23,7 +23,7 @@ def _parse_summary(value):
     return json.loads(value)
 
 
-# Purpose: Convert one jobs table row into the worker/frontend job shape.
+# Convert one jobs table row into the worker/frontend job shape.
 # Input: row (dict) fetched from the jobs table.
 # Output: Dict containing normalized job fields.
 def _job_from_row(row: dict) -> dict:
@@ -43,7 +43,7 @@ def _job_from_row(row: dict) -> dict:
     }
 
 
-# Purpose: Convert one clips table row into the worker/frontend clip shape.
+# Convert one clips table row into the worker/frontend clip shape.
 # Input: row (dict) fetched from the clips table.
 # Output: Dict containing normalized clip fields.
 def _clip_from_row(row: dict) -> dict:
@@ -60,7 +60,7 @@ def _clip_from_row(row: dict) -> dict:
     }
 
 
-# Purpose: Execute one SQL statement with optional fetch behavior and shared transaction handling.
+# Execute one SQL statement with optional fetch behavior and shared transaction handling.
 # Input: statement (str), params (tuple | None), and fetch mode ('one', 'all', or None).
 # Output: Query result dict/list or None depending on fetch mode.
 def _execute(statement: str, params=None, *, fetch: str | None = None):
@@ -86,7 +86,7 @@ def _execute(statement: str, params=None, *, fetch: str | None = None):
         conn.close()
 
 
-# Purpose: Confirm that the required jobs and clips tables exist before queries run.
+# Confirm that the required jobs and clips tables exist before queries run.
 # Input: No arguments.
 # Output: None; raises RuntimeError if the schema is missing or incomplete.
 def ensure_schema() -> None:
@@ -116,7 +116,7 @@ def ensure_schema() -> None:
             conn.close()
 
 
-# Purpose: Insert a new queued job row and return its generated identifiers.
+# Insert a new queued job row and return its generated identifiers.
 # Input: original_filename (str) and player_name (str) for the uploaded video.
 # Output: Dict containing the new job_id and video_id.
 def create_job_record(original_filename: str, player_name: str) -> dict:
@@ -152,7 +152,7 @@ def create_job_record(original_filename: str, player_name: str) -> dict:
         conn.close()
 
 
-# Purpose: Persist the latest in-memory job state back to the jobs table.
+# Persist the latest in-memory job state back to the jobs table.
 # Input: job (dict) containing the current job fields and optional summary.
 # Output: None; updates the matching jobs row.
 def save_job(job: dict) -> None:
@@ -189,7 +189,7 @@ def save_job(job: dict) -> None:
     )
 
 
-# Purpose: Fetch all jobs and attach their clips for the saved-video library view.
+# Fetch all jobs and attach their clips for the saved-video library view.
 # Input: No arguments.
 # Output: List of job dicts, each with a nested clips list.
 def list_jobs_with_clips() -> list[dict]:
@@ -247,7 +247,7 @@ def list_jobs_with_clips() -> list[dict]:
     return jobs
 
 
-# Purpose: Fetch every clip currently stored in the database.
+# Fetch every clip currently stored in the database.
 # Input: No arguments.
 # Output: List of clip dicts.
 def list_all_clips() -> list[dict]:
@@ -270,7 +270,7 @@ def list_all_clips() -> list[dict]:
     return [_clip_from_row(row) for row in rows]
 
 
-# Purpose: Fetch specific clips for one video/job by clip ID.
+# Fetch specific clips for one video/job by clip ID.
 # Input: video_id (str) and clip_ids (list[str]) to look up.
 # Output: List of matching clip dicts in clip index order.
 def get_clips_by_ids(video_id: str, clip_ids: list[str]) -> list[dict]:
@@ -300,7 +300,7 @@ def get_clips_by_ids(video_id: str, clip_ids: list[str]) -> list[dict]:
     return [_clip_from_row(row) for row in rows]
 
 
-# Purpose: Fetch specific clips across any videos and preserve the caller's requested order.
+# Fetch specific clips across any videos and preserve the caller's requested order.
 # Input: clip_ids (list[str]) naming the clips to retrieve.
 # Output: List of matching clip dicts ordered by the input IDs.
 def get_clips_by_ids_any_video(clip_ids: list[str]) -> list[dict]:
@@ -343,7 +343,7 @@ def get_clips_by_ids_any_video(clip_ids: list[str]) -> list[dict]:
     return ordered
 
 
-# Purpose: Replace all clips for one job with a new finalized clip list.
+# Replace all clips for one job with a new finalized clip list.
 # Input: job_id (str) and clips (list[dict]) containing uploaded clip metadata.
 # Output: None; rewrites the clips rows for that job.
 def replace_clips(job_id: str, clips: list[dict]) -> None:
@@ -387,7 +387,7 @@ def replace_clips(job_id: str, clips: list[dict]) -> None:
         conn.close()
 
 
-# Purpose: Delete one clip row and return its metadata if it existed.
+# Delete one clip row and return its metadata if it existed.
 # Input: video_id (str) and clip_id (str) identifying the clip to remove.
 # Output: Deleted clip dict or None if no matching row was found.
 def delete_clip(video_id: str, clip_id: str) -> dict | None:
@@ -431,7 +431,7 @@ def delete_clip(video_id: str, clip_id: str) -> dict | None:
         conn.close()
 
 
-# Purpose: Delete every job and clip row and reset the auto-increment counters.
+# Delete every job and clip row and reset the auto-increment counters.
 # Input: No arguments.
 # Output: Integer count of jobs that were removed.
 def delete_all_jobs() -> int:

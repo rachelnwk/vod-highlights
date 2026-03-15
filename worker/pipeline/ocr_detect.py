@@ -3,42 +3,30 @@ from pathlib import Path
 
 _reader = None
 
-
-# Purpose: Extract the numeric frame index from a sampled frame or crop filename.
-# Input: frame_path (str) such as 'frame_000123.jpg'.
-# Output: Integer frame index parsed from the filename.
+## Helper functions for timestamps
 def frame_filename_to_index(frame_path: str) -> int:
     match = re.search(r"(\d+)", Path(frame_path).stem)
     if not match:
         raise ValueError(f"Could not parse frame index from {frame_path}")
     return int(match.group(1))
 
-
-# Purpose: Convert a frame index into elapsed seconds using the sample FPS.
-# Input: frame_index (int) and sample_fps (float).
-# Output: Float timestamp in seconds.
 def frame_index_to_seconds(frame_index: int, sample_fps: float) -> float:
     if sample_fps <= 0:
         raise ValueError("sample_fps must be > 0")
     return frame_index / sample_fps
 
 
-# Purpose: Lazily create and cache the EasyOCR reader the first time OCR is needed.
-# Input: No arguments.
-# Output: easyocr.Reader instance.
+## lazily create and cache the EasyOCR reader
 def _get_reader():
     global _reader
-
     if _reader is None:
         import easyocr
-
-        # Lazy-load OCR so the worker can start without loading the model until a job actually needs it.
+        # Lazy-load
         _reader = easyocr.Reader(["en"], gpu=False)
-
     return _reader
 
 
-# Purpose: Convert one EasyOCR entry into a normalized text fragment record.
+# Convert one EasyOCR entry into a normalized text fragment record.
 # Input: entry (list) from EasyOCR containing bbox, text, and confidence.
 # Output: Fragment dict or None if the OCR entry is unusable.
 def _build_fragment(entry: list) -> dict | None:
@@ -74,10 +62,9 @@ def _build_fragment(entry: list) -> dict | None:
         "height": max(1.0, y_max - y_min),
     }
 
-
-# Purpose: Group OCR fragments that appear on the same visual row.
-# Input: fragments (list[dict]) from one crop image.
-# Output: List of fragment rows, each sorted left-to-right.
+#
+# Functions to help determine kills. Separate by row and by left/right side
+#
 def _group_fragments_into_rows(fragments: list[dict]) -> list[list[dict]]:
     if not fragments:
         return []
@@ -106,10 +93,6 @@ def _group_fragments_into_rows(fragments: list[dict]) -> list[list[dict]]:
         for row in rows
     ]
 
-
-# Purpose: Split one OCR row into left and right sides based on the largest horizontal gap.
-# Input: row_fragments (list[dict]) for a single kill-feed row.
-# Output: Tuple containing left_text and right_text strings.
 def _split_row_text(row_fragments: list[dict]) -> tuple[str, str]:
     if len(row_fragments) < 2:
         return "", ""
@@ -131,7 +114,7 @@ def _split_row_text(row_fragments: list[dict]) -> tuple[str, str]:
     return left_text, right_text
 
 
-# Purpose: Run OCR across all crop images and return normalized observation records.
+# Run OCR across all crop images and return normalized observation records.
 # Input: crops_dir (Path) containing crop images and sample_fps (float).
 # Output: List of observation dicts for highlight analysis.
 def extract_ocr_observations(crops_dir: Path, sample_fps: float) -> list[dict]:

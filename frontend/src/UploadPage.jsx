@@ -4,9 +4,8 @@ import UploadForm from './components/UploadForm';
 import VideoJobCard from './components/VideoJobCard';
 import { deleteAllVideos, discardClip, downloadMergedClips, listVideos, startLocalJob } from './client';
 
-// Purpose: Coordinate uploads, saved videos, clip selection, and dashboard actions.
-// Input: No props.
-// Output: JSX for the main upload-and-library page.
+// Coordinate uploads, saved videos, clip selection, and dashboard actions
+
 export default function UploadPage() {
   const [file, setFile] = useState(null);
   const [playerName, setPlayerName] = useState('');
